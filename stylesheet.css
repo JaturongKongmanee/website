@@ -64,13 +64,14 @@
 }
 
 a {
-  color: #1772d0;
+  /* color: #1772d0; */
+  color: #5779ef;
   text-decoration: none;
 }
 
 a:focus,
 a:hover {
-  color: #f09228;
+  color: #75793b;
   text-decoration: none;
 }
 
@@ -126,6 +127,21 @@ name {
   -webkit-transition: opacity .2s ease-in-out;
 }
 
-span.highlight {
-  background-color: #ffffd0;
+img.rounded {
+  object-fit: cover;
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+}
+
+.bottom-line {
+  border-bottom: 1px solid;
+}
+
+.table-head {
+  border-bottom: 1px solid #cccccc;
+}
+
+.highlight {
+  background-color: #d9f6ea;
 }
