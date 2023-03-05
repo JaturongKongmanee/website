@@ -145,3 +145,10 @@ img.rounded {
 .highlight {
   background-color: #d9f6ea;
 }
+
+
+certificatetitle {
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 700
+}
