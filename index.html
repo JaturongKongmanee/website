@@ -58,7 +58,11 @@
             <td style="padding:20px;width:100%;vertical-align:middle">
               <heading>Research</heading>
               <p>
-                My research focuses on human-AI teaming to develop interactive human-AI systems that will accelerate the AI/ML system development process. 
+                <strong>NEWS!</strong> I am taking the Safety ML summer course offered by the Center for AI Safety, which focuses on reducing risks from advanced AI systems.
+              </p>
+
+              <p>
+                My current research focuses on human-AI teaming to develop interactive human-AI systems that will accelerate the AI/ML system development process. 
                 The goal is to advance our understanding of how human operators and AI systems can effectively work together and develop rigorous techniques
                  for building safe and trustworthy AI systems to establish reliance on their behavior and human-AI team compatibility.
                 <br>
@@ -69,10 +73,11 @@
                 <ul>
                   <li>
                     <b>Current Project: </b>
-                    I developed an adaptive active learning (AL) sampling strategy for highly imbalanced data sets for anomaly email detection which is sample-efficient, able to detect rare anomalies, and can cope 
-                    with situations where uncertainty-based sampling or only unsupervised anomaly detection fails. The developed technique is being employed at one of the largest financial services companies in Canada. 
-                    And I'm currently focusing on incorporating representation learning, active learning, and interactive human teaching paradigms to improve anomaly email detection systems. The goal is to efficiently utilize the available unlabeled data 
-                    and human expertise to improve the detection of exfiltration of data via emails, which is one of the serious cybersecurity threats.
+                    I developed an adaptive sampling strategy for active learning (AL) for highly unbalanced data sets (< 3% of positive class) for anomaly email detection which is sample-efficient, able to detect rare anomalies, and can cope 
+                    with situations where uncertainty-based sampling AL or only unsupervised anomaly detection fails. The developed technique is being employed at one of the largest financial services companies in Canada. 
+                    And I'm currently focusing on incorporating representation learning, self-supervised learning and semi-supervised learning, and interactive human teaching paradigms to improve anomaly email detection systems. 
+                    The goal is to efficiently utilize the available unlabeled data 
+                    and human expertise to improve the detection of data exfiltration, which is one of the serious cybersecurity threats.
                   </p>
                   </li>
                 </ul>
@@ -94,10 +99,54 @@
             </tr>
           </tbody>
         </table>
-
+        
 
         <table style="width:100%;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
 				
+
+          <tr onmouseout="icml_stop()" onmouseover="icml_start()" class="bottom-line">
+            <td style="padding:20px;width:25%;vertical-align:middle">
+              <div class="one">
+                <div class="two" id='icml_image'>
+                  <img src='images/icml23/icml23_after.png' width="160"></div>
+                <img src='images/icml23/icml23_before.png' width="160">
+              </div>
+              <script type="text/javascript">
+                function icml_start() {
+                  document.getElementById('icml_image').style.opacity = "1";
+                }
+
+                function icml_stop() {
+                  document.getElementById('icml_image').style.opacity = "0";
+                }
+                icml_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:75%;vertical-align:middle">
+              <a target="_blank" href="">
+                <papertitle>Unsupervised Learning of Distributional Properties can Supplement Human Labeling and Increase Active Learning Efficiency in Anomaly Detection</papertitle>
+              </a>
+              <br>
+              <strong>Jaturong Kongmanee</strong>,
+              <span>Mark Chignell </span>,
+              <span>Khilan Jerath</span>
+              <span>Abhay Raman</span>
+              <br>
+              <br>
+              <b><em>ICML</em> 2023</b>: the 40 th International Conference on Machine Learning
+              <br>
+              [
+              <a target="_blank" href="">paper</a>
+              ]
+              <p></p>
+              <p>
+                We propose an adaptive AL sampling strategy that leverages the underlying prior data distribution, 
+                as well as model uncertainty, to produce batches of cases to be labeled that contain instances of rare anomalies. 
+              </p>
+            </td>
+          </tr>	
+
+
           <tr onmouseout="cec_stop()" onmouseover="cec_start()" class="bottom-line">
             <td style="padding:20px;width:25%;vertical-align:middle">
               <div class="one">
@@ -121,10 +170,10 @@
                 <papertitle>Multi-objective Coevolution and Decision-making for Cooperative and Competitive Environments</papertitle>
               </a>
               <br>
-							<a href="">Anirudh Suresh</a>,
+							<span>Anirudh Suresh</span>,
               <strong>Jaturong Kongmanee</strong>,
-              <a href="">Kalyanmoy Deb</a>,
-              <a href="">Vishnu Naresh Boddeti</a>
+              <span>Kalyanmoy Deb</span>,
+              <span>Vishnu Naresh Boddeti</span>
               <br>
               <br>
               <b><em>CEC</em> 2021</b>: IEEE Congress on Evolutionary Computation
@@ -203,8 +252,8 @@
               </a>
               <br>
               <strong>Jaturong Kongmanee</strong>,
-							<a href="">Phongphun Kijsanayothin</a>,
-              <a href="">Rattikorn Hewett</a>
+							<span>Phongphun Kijsanayothin</span>,
+              <span>Rattikorn Hewett</span>
               <br>
               <br>
               <b><em>ASE</em> 2019</b>: IEEE/ACM International Conference on Automated Software Engineering
@@ -245,7 +294,7 @@
               <br>
               <a target="_blank" href="https://www.linkedin.com/in/thanyathorn-thanapattheerakul/">Thanyathorn Thanapattheerakul</a>
               <strong>Jaturong Kongmanee</strong>,
-              <a href="">Jonathan H. Chan</a>
+              <span>Jonathan H. Chan</span>
               <br>
               <br>
               <b><em>VINCI</em> 2017</b>: International Symposium on Visual Information Communication and Interaction
