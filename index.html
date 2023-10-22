@@ -22,7 +22,7 @@
                 <name>Jaturong Kongmanee</name>
               </p>
               <p>I am a Ph.D. student at the <a target="_blank" href="https://www.utoronto.ca">University of Toronto</a>
-                , fortunately advised by Professor <a target="_blank" href="https://scholar.google.com/citations?user=6C1lQzwAAAAJ&hl=en&oi=ao">Mark H. Chignell</a>. I work on Machine Learning for Cybersecurity, ML Safety, NLP, Generative ML.
+                , fortunately supervised by Professor <a target="_blank" href="https://scholar.google.com/citations?user=6C1lQzwAAAAJ&hl=en&oi=ao">Mark H. Chignell</a>. I work on Machine Learning for Cybersecurity, ML Safety, NLP, Generative ML.
               </p>
               <p>
                 Prior to joining UofT, I started my Ph.D. at the<a target="_blank" href="https://cse.msu.edu/"> Computer Science and Engineering Department</a> 
@@ -105,7 +105,50 @@
         
 
         <table style="width:100%;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-				
+          <tr onmouseout="iait_stop()" onmouseover="iait_start()" class="bottom-line">
+            <td style="padding:20px;width:25%;vertical-align:middle">
+              <div class="one">
+                <div class="two" id='iait_image'>
+                  <img src='images/iait23/iait23_before.png' width="160"></div>
+                <img src='images/iait23/iait23_after.png' width="160">
+              </div>
+              <script type="text/javascript">
+                function iait_start() {
+                  document.getElementById('iait_image').style.opacity = "1";
+                }
+
+                function iait_stop() {
+                  document.getElementById('iait_image').style.opacity = "0";
+                }
+                iait_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:75%;vertical-align:middle">
+              <a target="_blank" href="">
+                <papertitle>Dual-Stage OOD Detection Learning with an Unsupervised Start</papertitle>
+              </a>
+              <br>
+              <strong>Jaturong Kongmanee</strong>,
+              <span>Thanyathorn (Smile) Thanapattheerakul</span>,
+              <span>Mark Chignell</span>
+              <br>
+              <br>
+              <b><em>IAIT</em> 2023 </b>: International Conference on Advances in Information Technology
+              <br>
+              <!-- [
+              <a target="_blank" href="https://arxiv.org/abs/2307.08782">paper</a>
+              ]
+              [
+              <a target="_blank" href="https://icml.cc/virtual/2023/27393">website</a>
+              ] -->
+              <p></p>
+              <p>
+                We present a new two-stage training procedure for improving OOD input detection.
+                Our method uses unsupervised contrastive representation learning to learn a class-invariant features in the first stage. 
+                Then, in the second stage, we train the same model with a label smoothing technique, by minimizing cross-entropy.
+              </p>
+            </td>
+          </tr>	
 
           <tr onmouseout="icml_stop()" onmouseover="icml_start()" class="bottom-line" bgcolor="#d9f6ea">
             <td style="padding:20px;width:25%;vertical-align:middle">
@@ -616,7 +659,7 @@
               <br>
               <br>
               <p>
-              Last updated: Sept 17, 2023 <span>   </span> Website Layout from <a target="_blank" href="https://jonbarron.info/">Jon Barron</a>
+              Last updated: Oct 22, 2023 <span>   </span> Website Layout from <a target="_blank" href="https://jonbarron.info/">Jon Barron</a>
               </p>
             </td>
           </tr>
