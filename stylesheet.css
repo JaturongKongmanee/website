@@ -103,6 +103,14 @@ papertitle {
   color: #4d7025;
 }
 
+locationtitle {
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 100;
+  /* color: #6b6865; */
+  /* color: #4d7025; */
+}
+
 name {
   font-family: 'Lato', Verdana, Helvetica, sans-serif;
   font-size: 32px;
