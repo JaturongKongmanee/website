@@ -104,53 +104,90 @@
         
 
         <table style="width:100%;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          
-          <!-- <tr onmouseout="aaai_stop()" onmouseover="aaai_start()" class="bottom-line">
+ 
+          <tr onmouseout="ijcai24_ood_stop()" onmouseover="ijcai24_ood_start()" class="bottom-line">
             <td style="padding:20px;width:25%;vertical-align:middle">
               <div class="one">
-                <div class="two" id='aaai_image'>
-                  <img src='images/aaai24/aaai24_before.png' width="160"></div>
-                <img src='images/aaai24/aaai24_after.png' width="160">
+                <div class="two" id='ijcai24_ood_image'>
+                  <img src='images/ijcai24_ood/ijcai24_ood_before.png' width="160"></div>
+                <img src='images/ijcai24_ood/ijcai24_ood_after.png' width="160">
               </div>
               <script type="text/javascript">
-                function aaai_start() {
-                  document.getElementById('aaai_image').style.opacity = "1";
+                function ijcai24_ood_start() {
+                  document.getElementById('ijcai24_ood_image').style.opacity = "1";
                 }
 
-                function aaai_stop() {
-                  document.getElementById('aaai_image').style.opacity = "0";
+                function ijcai24_ood_stop() {
+                  document.getElementById('ijcai24_ood_image').style.opacity = "0";
                 }
-                aaai_stop()
+                ijcai24_ood_stop()
               </script>
             </td>
             <td style="padding:20px;width:75%;vertical-align:middle">
-              <papertitle>Unsupervised Learning of Distributional Properties can Supplement Human Labeling and Increase Active Learning Efficiency in Anomaly Detection</papertitle>
-
+              <papertitle>A Simplified and More Efficient Training Procedure for OOD Detection</papertitle>
+              <!-- <papertitle>Putting Human-AI Interaction into Practice: A Cybersecurity Case Study</papertitle> -->
               <br>
               <strong>Jaturong Kongmanee</strong>,
-              <span>Mark Chignell </span>,
-              <span>Khilan Jerath</span>,
-              <span>Abhay Raman</span>
+              <span>Mark H. Chignell</span>
               <br>
               <br>
-              <a target="_blank" href="https://aaai.org/aaai-conference/"><b><em>AAAI</em> 2024</b></a>: AAAI Conference on Artificial Intelligence
+              <a target="_blank" href="https://ijcai24.org/"><b><em>IJCAI</em> 2024 </b></a>: International Joint Conference on Artificial Intelligence
               <br>
               <locationtitle>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-map-fill" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M3.1 11.2a.5.5 0 0 1 .4-.2H6a.5.5 0 0 1 0 1H3.75L1.5 15h13l-2.25-3H10a.5.5 0 0 1 0-1h2.5a.5.5 0 0 1 .4.2l3 4a.5.5 0 0 1-.4.8H.5a.5.5 0 0 1-.4-.8l3-4z"/>
                   <path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999z"/>
-                </svg> Vancouver, Canada, February 20-27, 2024</locationtitle>
+                </svg> Jeju Island, South Korea, August 3-9, 2024</locationtitle>
               <br>
-              <p></p>
-              <p>
-                We developed an adaptive AL sampling strategy that leverages the underlying prior data distribution, 
-                as well as model uncertainty, to produce batches of samples to be labeled that contain instances of 
-                rare anomalies. We show that 
-                (1) the classifier benefits from a batch of representative and informative instances of both normal and anomalous samples, 
-                (2) unsupervised anomaly detection plays a useful role in building the classifier in the early stages of training, when relatively little labeling has been done thus far.
-              </p>
+              [
+              <a target="_blank" href="">paper (coming soon)</a>
+              ]
             </td>
-          </tr>	 -->
+          </tr>	
+          
+
+          <tr onmouseout="ijcai24_al_stop()" onmouseover="ijcai24_al_start()" class="bottom-line">
+            <td style="padding:20px;width:25%;vertical-align:middle">
+              <div class="one">
+                <div class="two" id='ijcai24_al_image'>
+                  <img src='images/ijcai24_AL/ijcai24_AL_after.png' width="160"></div>
+                <img src='images/ijcai24_AL/ijcai24_AL_before.png' width="160">
+              </div>
+              <script type="text/javascript">
+                function ijcai24_al_start() {
+                  document.getElementById('ijcai24_al_image').style.opacity = "1";
+                }
+
+                function ijcai24_al_stop() {
+                  document.getElementById('ijcai24_al_image').style.opacity = "0";
+                }
+                ijcai24_al_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:75%;vertical-align:middle">
+              <papertitle>Unsupervised Early Sampling Helps Focus Human Expertise in Active Learning of Anomalies</papertitle>
+              <!-- <papertitle>Putting Human-AI Interaction into Practice: A Cybersecurity Case Study</papertitle> -->
+              <br>
+              <strong>Jaturong Kongmanee</strong>,
+              <span>Khilan Jerath</span>,
+              <span>Abhay Raman</span>,
+              <span>Mark H. Chignell</span>
+              <br>
+              <br>
+              <a target="_blank" href="https://ijcai24.org/"><b><em>IJCAI</em> 2024 </b></a>: International Joint Conference on Artificial Intelligence
+              <br>
+              <locationtitle>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-map-fill" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M3.1 11.2a.5.5 0 0 1 .4-.2H6a.5.5 0 0 1 0 1H3.75L1.5 15h13l-2.25-3H10a.5.5 0 0 1 0-1h2.5a.5.5 0 0 1 .4.2l3 4a.5.5 0 0 1-.4.8H.5a.5.5 0 0 1-.4-.8l3-4z"/>
+                  <path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999z"/>
+                </svg> Jeju Island, South Korea, August 3-9, 2024</locationtitle>
+              <br>
+              [
+              <a target="_blank" href="">paper (coming soon)</a>
+              ]
+            </td>
+          </tr>	
+          
 
           <tr onmouseout="ichms24_stop()" onmouseover="ichms24_start()" class="bottom-line">
             <td style="padding:20px;width:25%;vertical-align:middle">
@@ -179,7 +216,7 @@
               <span>April Luna</span>,
               <span>Khilan Jerath</span>,
               <span>Abhay Raman</span>,
-              <span>Mark Chignell</span>
+              <span>Mark H. Chignell</span>
               <br>
               <br>
               <a target="_blank" href="https://ichms.blog.torontomu.ca/"><b><em>IEEE ICHMS</em> 2024 </b></a>: IEEE International Conference on Human-Machine Systems
@@ -222,7 +259,7 @@
               <br>
               <strong>Jaturong Kongmanee</strong>,
               <span>Thanyathorn (Smile) Thanapattheerakul</span>,
-              <span>Mark Chignell</span>
+              <span>Mark H. Chignell</span>
               <br>
               <br>
               <a target="_blank" href="https://www.iait-conf.org/2023/"><b><em>IAIT</em> 2023 </b></a>: International Conference on Advances in Information Technology
@@ -272,7 +309,7 @@
 
               <br>
               <strong>Jaturong Kongmanee</strong>,
-              <span>Mark Chignell </span>,
+              <span>Mark H. Chignell </span>,
               <span>Khilan Jerath</span>,
               <span>Abhay Raman</span>
               <br>
