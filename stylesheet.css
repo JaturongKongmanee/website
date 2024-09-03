@@ -170,3 +170,10 @@ talktitle {
   font-size: 20px;
   font-weight: 700
 }
+
+.news-styles {
+  background-color: #d5d5d5;
+  margin-right: 10px;
+  border-radius: 8px;
+  padding: 4px;
+}
