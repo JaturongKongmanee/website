@@ -123,6 +123,50 @@
 
         <table style="width:100%;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
  
+          <tr onmouseout="model_mastery_stop()" onmouseover="model_mastery_start()" class="bottom-line">
+            <td style="padding:20px;width:25%;vertical-align:middle">
+              <div class="one">
+                <div class="two" id='model_mastery_image'>
+                  <img src='images/model_mastery/model_mastery_before.png' width="160"></div>
+                <img src='images/model_mastery/model_mastery_after.png' width="160">
+              </div>
+              <script type="text/javascript">
+                function model_mastery_start() {
+                  document.getElementById('model_mastery_image').style.opacity = "1";
+                }
+
+                function model_mastery_stop() {
+                  document.getElementById('model_mastery_image').style.opacity = "0";
+                }
+                model_mastery_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:75%;vertical-align:middle">
+              <papertitle>The Model Mastery Lifecycle: A Framework for Designing Human-AI Interaction</papertitle>
+              <br>
+              <span>Mark H. Chignell</span>,
+              <span>Mu-Huan Chung</span>,
+              <strong>Jaturong Kongmanee</strong>,
+              <span>Khilan Jerath</span>,
+              <span>Abhay Raman</span>
+              <br>
+              <!-- <br>
+              <a target="_blank" href="https://ijcai24.org/"><b><em>IJCAI</em> 2024 </b></a>: International Joint Conference on Artificial Intelligence
+              <br>
+              <locationtitle>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-map-fill" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M3.1 11.2a.5.5 0 0 1 .4-.2H6a.5.5 0 0 1 0 1H3.75L1.5 15h13l-2.25-3H10a.5.5 0 0 1 0-1h2.5a.5.5 0 0 1 .4.2l3 4a.5.5 0 0 1-.4.8H.5a.5.5 0 0 1-.4-.8l3-4z"/>
+                  <path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999z"/>
+                </svg> Jeju Island, South Korea, August 3-9, 2024</locationtitle>
+              <br> -->
+              [
+              <a target="_blank" href="https://arxiv.org/pdf/2408.12781">arXiv</a>
+              ]
+            </td>
+          </tr>	
+          
+          
+          
           <tr onmouseout="ijcai24_ood_stop()" onmouseover="ijcai24_ood_start()" class="bottom-line">
             <td style="padding:20px;width:25%;vertical-align:middle">
               <div class="one">
