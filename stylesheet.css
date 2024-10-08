@@ -170,3 +170,23 @@ talktitle {
   font-size: 20px;
   font-weight: 700
 }
+
+.news-styles {
+  background-color: #d5d5d5;
+  margin-right: 10px;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+::-moz-selection { /* Code for Firefox */
+  color: #fff;
+  /* background: #4d7025; */
+  background: #415d9f;
+}
+
+::selection {
+  /* color: rgb(219, 219, 219); */
+  color: #fff;
+  /* background: #4d7025; */
+  background: #415d9f;
+}
