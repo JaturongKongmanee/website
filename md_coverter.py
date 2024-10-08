@@ -27,5 +27,5 @@ temp_html = LINK_TO_MAIN_PAGE + temp_html
 with open(PATH + f'{file_name}.html', 'w') as f:
     f.write(temp_html)
 
-
+# python md_coverter.py <<file-name>>.md  
 
