@@ -190,3 +190,42 @@ talktitle {
   /* background: #4d7025; */
   background: #415d9f;
 }
+
+
+
+.keywords1 {
+  background-color: #9ddba1;
+  border-radius: 6px;
+  padding: 4px;
+  color: #fff;
+  padding: 1px;
+}
+
+.keywords2 {
+  background-color: #91c589;
+  border-radius: 6px;
+  padding: 4px;
+  color: #fff;
+  padding: 1px;
+}
+
+.keywords3 {
+  background-color: #63a36b;
+  border-radius: 6px;
+  padding: 4px;
+  color: #fff;
+  height: 20px;
+  padding: 1px;
+}
+
+.keywords4 {
+  background-color: #5e8751;
+  border-radius: 6px;
+  padding: 4px;
+  color: #fff;
+  padding: 1px;
+}
+
+.research-list > li {
+  margin: 3px 0;
+}
