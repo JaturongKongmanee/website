@@ -137,6 +137,36 @@
 
         <table style="width:100%;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
  
+          <tr onmouseout="llm_stop()" onmouseover="llm_start()" class="bottom-line">
+            <td style="padding:20px;width:25%;vertical-align:middle">
+              <div class="one">
+                <div class="two" id='llm_image'>
+                  <img src='images/llm/llm_before.png' width="160"></div>
+                <img src='images/llm/llm_after.png' width="160">
+              </div>
+              <script type="text/javascript">
+                function llm_start() {
+                  document.getElementById('llm_image').style.opacity = "1";
+                }
+
+                function llm_stop() {
+                  document.getElementById('llm_image').style.opacity = "0";
+                }
+                llm_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:75%;vertical-align:middle">
+              <papertitle>An Attempt to Unraveling Token Prediction Refinement and Identifying Essential Layers of Large Language Models</papertitle>
+              <br>
+              (as an independent researcher)
+              <br>
+              [
+              <a target="_blank" href="https://arxiv.org/pdf/2501.15054">arXiv 2025</a>
+              ]
+            </td>
+          </tr>	
+          
+          
           <tr onmouseout="model_mastery_stop()" onmouseover="model_mastery_start()" class="bottom-line">
             <td style="padding:20px;width:25%;vertical-align:middle">
               <div class="one">
@@ -170,7 +200,7 @@
                 </svg> Jeju Island, South Korea, August 3-9, 2024</locationtitle>
               <br> -->
               [
-              <a target="_blank" href="https://arxiv.org/pdf/2408.12781">arXiv</a>
+              <a target="_blank" href="https://arxiv.org/pdf/2408.12781">arXiv 2024</a>
               ]
             </td>
           </tr>	
