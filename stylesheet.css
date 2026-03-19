@@ -81,23 +81,19 @@ th,
 tr,
 p,
 a {
-  /* font-family: 'Lato', Verdana, Helvetica, sans-serif; */
   font-family: 'IowanOldSt BT', sans-serif;
   font-size: 14px
 }
 
 strong {
-  /* font-family: 'Lato', Verdana, Helvetica, sans-serif; */
   font-size: 14px;
 }
 
 heading {
-  /* font-family: 'Lato', Verdana, Helvetica, sans-serif; */
   font-size: 22px;
 }
 
 papertitle {
-  /* font-family: 'Lato', Verdana, Helvetica, sans-serif; */
   font-size: 14px;
   font-weight: 700;
   /* color: #6b6865; */
@@ -105,7 +101,6 @@ papertitle {
 }
 
 locationtitle {
-  /* font-family: 'Lato', Verdana, Helvetica, sans-serif; */
   font-size: 12px;
   font-weight: 100;
   /* color: #6b6865; */
@@ -113,7 +108,6 @@ locationtitle {
 }
 
 name {
-  /* font-family: 'Lato', Verdana, Helvetica, sans-serif; */
   font-size: 32px;
 }
 
@@ -160,14 +154,12 @@ img.rounded {
 
 
 certificatetitle {
-  /* font-family: 'Lato', Verdana, Helvetica, sans-serif; */
   font-size: 16px;
   font-weight: 700
 }
 
 
 talktitle {
-  /* font-family: 'Lato', Verdana, Helvetica, sans-serif; */
   font-size: 20px;
   font-weight: 700
 }
