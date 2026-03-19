@@ -97,7 +97,8 @@ papertitle {
   font-size: 14px;
   font-weight: 700;
   /* color: #6b6865; */
-  color: #4d7025;
+  /* color: #4d7025; */
+  color: #555;
 }
 
 locationtitle {
