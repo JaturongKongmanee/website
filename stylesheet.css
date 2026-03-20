@@ -135,7 +135,7 @@ name {
 
 img.rounded {
   object-fit: cover;
-  border-radius: 50%;
+  border-radius: 5%;
   height: 210px;
   width: 200px;
 }
