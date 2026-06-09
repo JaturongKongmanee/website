@@ -223,3 +223,56 @@ talktitle {
 .research-list > li {
   margin: 3px 0;
 }
+
+
+
+/* Style the button that is used to open and close the collapsible content */
+/* CSS Styling */
+.collapsible-card {
+  max-width: 400px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: sans-serif;
+  margin: 10px 0;
+}
+
+/* Turns the summary tag into a clean clickable button */
+.collapsible-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  /* background-color: #d5d5d5;; */
+  background-color: #415d9f;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  list-style: none; /* Removes the default browser arrow icon */
+}
+
+/* For Firefox / Safari compatibility to hide default arrows */
+.collapsible-btn::-webkit-details-marker {
+  display: none;
+}
+
+/* Styles the content wrapper */
+.collapsible-content {
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #ddd;
+}
+
+/* Rotates the custom arrow smoothly when the element opens */
+.collapsible-card[open] .arrow {
+  transform: rotate(180deg);
+  transition: transform 0.2s ease;
+}
+
+.arrow {
+  transition: transform 0.2s ease;
+}
+
+
+
