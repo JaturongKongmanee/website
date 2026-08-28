@@ -233,9 +233,41 @@
             </tr>
           </tbody>
         </table>
+
+        
         
 
         <table style="width:100%;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+          <tr onmouseout="ldt_stop()" onmouseover="ldt_start()" class="bottom-line">
+            <td style="padding-left:20px;width:15%;vertical-align:middle">
+              <div class="one">
+                <div class="two" id='ldt_image'>
+                  <img src='images/ldt/ldt_before.png' width="150"></div>
+                <img src='images/ldt/ldt_after.png' width="150">
+              </div>
+              <script type="text/javascript">
+                function ldt_start() {
+                  document.getElementById('ldt_image').style.opacity = "1";
+                }
+
+                function ldt_stop() {
+                  document.getElementById('ldt_image').style.opacity = "0";
+                }
+                llm_stop()
+              </script>
+            </td>
+            <td style="padding-left:20px;width:75%;vertical-align:middle">
+              <papertitle>The Latent Diagnostic Taxonomy: A Framework for Constructing Classifiers and Diagnosing Their Decisions, Applied to Prompt Injection Detection</papertitle>
+              <br>
+              (with Smile Thanapattheerakul)
+              <br>
+              [
+              <a target="_blank" href="https://arxiv.org/abs/2608.26423">arXiv 2026</a>
+              ]
+            </td>
+          </tr>	
+          
+          
           <tr onmouseout="llm_stop()" onmouseover="llm_start()" class="bottom-line">
             <td style="padding-left:20px;width:15%;vertical-align:middle">
               <div class="one">
@@ -260,7 +292,7 @@
               (as an independent researcher)
               <br>
               [
-              <a target="_blank" href="https://arxiv.org/pdf/2501.15054">arXiv 2025</a>
+              <a target="_blank" href="https://arxiv.org/abs/2501.15054">arXiv 2025</a>
               ]
             </td>
           </tr>	
