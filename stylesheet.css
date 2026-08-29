@@ -172,6 +172,15 @@ talktitle {
   padding: 4px;
 }
 
+.note-blog-styles {
+  background-color: #fcdfd9;
+  /* background-color: #F6661E; */
+  margin-right: 10px;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+
 ::-moz-selection { /* Code for Firefox */
   color: #fff;
   /* background: #4d7025; */
