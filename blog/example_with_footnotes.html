@@ -1,111 +1,102 @@
-import markdown
-import sys
-import re
-from markdown.extensions import tables, fenced_code, toc, footnotes
-from datetime import datetime
-
-LINK_TO_MAIN_PAGE = '<a class="link" href="https://jaturongkongmanee.github.io/website/"><input type="button" value="Back to the main page"></a>'
-PATH = './blog/'
-
-HTML_TEMPLATE = '''<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{title}</title>
+    <title>Understanding Neural Networks with Footnotes</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="../stylesheet.css">
     <link href="https://fonts.cdnfonts.com/css/iowanoldst-bt" rel="stylesheet">
     <style>
-        * {{
+        * {
             box-sizing: border-box;
-        }}
+        }
 
-        body {{
+        body {
             font-family: 'IowanOldSt BT', Georgia, serif;
             line-height: 1.6;
             color: #333;
             background: #fafafa;
-        }}
+        }
 
-        .blog-container {{
+        .blog-container {
             max-width: 1100px;
             margin: 0 auto;
             padding: 20px;
-        }}
+        }
 
-        .back-link {{
+        .back-link {
             margin-bottom: 2em;
-        }}
+        }
 
-        .blog-wrapper {{
+        .blog-wrapper {
             display: grid;
             grid-template-columns: 150px 1fr 180px;
             gap: 30px;
             margin-bottom: 3em;
-        }}
+        }
 
-        article {{
+        article {
             order: 2;
-        }}
+        }
 
-        .toc-sidebar {{
+        .toc-sidebar {
             order: 1;
-        }}
+        }
 
-        .sidenote-column {{
+        .sidenote-column {
             order: 3;
             position: relative;
-        }}
+        }
 
-        @media (max-width: 900px) {{
-            .blog-wrapper {{
+        @media (max-width: 900px) {
+            .blog-wrapper {
                 grid-template-columns: 1fr;
-            }}
-            article {{
+            }
+            article {
                 order: 0;
-            }}
-            .toc-sidebar {{
+            }
+            .toc-sidebar {
                 order: 0;
-            }}
-            .toc-sidebar {{
+            }
+            .toc-sidebar {
                 position: static;
                 margin-top: 3em;
                 padding: 20px;
                 background: #f9f9f9;
                 border-radius: 5px;
-            }}
-        }}
+            }
+        }
 
-        article {{
+        article {
             background: white;
             padding: 40px;
             border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-        }}
+        }
 
-        .post-header {{
+        .post-header {
             margin-bottom: 2em;
             border-bottom: 2px solid #e0e0e0;
             padding-bottom: 1.5em;
-        }}
+        }
 
-        .post-title {{
+        .post-title {
             font-size: 2.5em;
             font-weight: 700;
             margin: 0 0 0.3em 0;
             color: #2c3e50;
             line-height: 1.2;
-        }}
+        }
 
-        .post-meta {{
+        .post-meta {
             color: #7f8c8d;
             font-size: 0.95em;
             margin-bottom: 1em;
             line-height: 1.6;
-        }}
+        }
 
-        .post-tags {{
+        .post-tags {
             display: flex;
             gap: 0.5em;
             flex-wrap: wrap;
@@ -113,9 +104,9 @@ HTML_TEMPLATE = '''<!DOCTYPE html>
             margin-bottom: 2em;
             padding-top: 1.5em;
             border-top: 1px solid #ecf0f1;
-        }}
+        }
 
-        .tag {{
+        .tag {
             display: inline-block;
             background: #e8f4f8;
             color: #2980b9;
@@ -126,54 +117,54 @@ HTML_TEMPLATE = '''<!DOCTYPE html>
             text-decoration: none;
             border: 1px solid #b8dbe8;
             transition: all 0.2s ease;
-        }}
+        }
 
-        .tag:hover {{
+        .tag:hover {
             background: #2980b9;
             color: white;
             border-color: #2980b9;
-        }}
+        }
 
-        h1, h2, h3, h4, h5, h6 {{
+        h1, h2, h3, h4, h5, h6 {
             margin-top: 1.8em;
             margin-bottom: 0.6em;
             font-weight: 700;
             color: #2c3e50;
             line-height: 1.3;
-        }}
+        }
 
-        h1 {{
+        h1 {
             font-size: 2em;
-        }}
+        }
 
-        h2 {{
+        h2 {
             font-size: 1.6em;
             border-bottom: 2px solid #ecf0f1;
             padding-bottom: 0.5em;
-        }}
+        }
 
-        h3 {{
+        h3 {
             font-size: 1.3em;
-        }}
+        }
 
-        h4 {{
+        h4 {
             font-size: 1.1em;
-        }}
+        }
 
-        p {{
+        p {
             margin: 1em 0;
-        }}
+        }
 
-        code {{
+        code {
             background: #fcdfd9;
             padding: 2px 6px;
             border-radius: 3px;
             font-family: 'Courier New', monospace;
             font-size: 0.9em;
             color: #c7254e;
-        }}
+        }
 
-        pre {{
+        pre {
             background: #fcdfd9;
             color: #333;
             padding: 15px;
@@ -181,83 +172,83 @@ HTML_TEMPLATE = '''<!DOCTYPE html>
             overflow-x: auto;
             line-height: 1.4;
             margin: 1.5em 0;
-        }}
+        }
 
-        pre code {{
+        pre code {
             background: none;
             padding: 0;
             color: #333;
-        }}
+        }
 
-        blockquote {{
+        blockquote {
             border-left: 4px solid #3498db;
             padding-left: 1em;
             margin-left: 0;
             color: #7f8c8d;
             font-style: italic;
-        }}
+        }
 
-        img {{
+        img {
             max-width: 100%;
             height: auto;
             margin: 1.5em 0;
             border-radius: 5px;
-        }}
+        }
 
-        table {{
+        table {
             width: 100%;
             border-collapse: collapse;
             margin: 1.5em 0;
-        }}
+        }
 
-        table thead {{
+        table thead {
             background: #ecf0f1;
-        }}
+        }
 
-        table th {{
+        table th {
             padding: 0.8em;
             text-align: left;
             font-weight: 600;
             color: #2c3e50;
-        }}
+        }
 
-        table td {{
+        table td {
             padding: 0.8em;
             border-bottom: 1px solid #ecf0f1;
-        }}
+        }
 
-        table tbody tr:hover {{
+        table tbody tr:hover {
             background: #f9f9f9;
-        }}
+        }
 
-        a {{
+        a {
             color: #3498db;
             text-decoration: none;
             transition: color 0.2s ease;
-        }}
+        }
 
-        a:hover {{
+        a:hover {
             color: #2980b9;
             text-decoration: underline;
-        }}
+        }
 
         /* Table of Contents Sidebar */
-        .toc-sidebar {{
+        .toc-sidebar {
             position: sticky;
             top: 20px;
             height: fit-content;
             max-height: calc(100vh - 40px);
             overflow-y: auto;
-        }}
+        }
 
-        .toc-content {{
+        .toc-content {
             background: white;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-        }}
+        }
 
-        .toc-title {{
+        .toc-title {
             font-size: 1.1em;
             font-weight: 700;
             margin-bottom: 1em;
@@ -265,56 +256,56 @@ HTML_TEMPLATE = '''<!DOCTYPE html>
             display: flex;
             align-items: center;
             gap: 0.5em;
-        }}
+        }
 
-        .toc-content ul {{
+        .toc-content ul {
             list-style: none;
             padding: 0;
             margin: 0;
-        }}
+        }
 
-        .toc-content li {{
+        .toc-content li {
             margin: 0.4em 0;
-        }}
+        }
 
-        .toc-content a {{
+        .toc-content a {
             display: block;
             padding: 0.4em 0.8em;
             border-radius: 3px;
             font-size: 0.8em;
             color: #7f8c8d;
             transition: all 0.2s ease;
-        }}
+        }
 
-        .toc-content a:hover {{
+        .toc-content a:hover {
             background: #f0f0f0;
             color: #333;
-        }}
+        }
 
-        .toc-content ul ul {{
+        .toc-content ul ul {
             margin-left: 1em;
             border-left: 2px solid #ecf0f1;
             padding-left: 0.5em;
-        }}
+        }
 
-        .toc-content ul ul a {{
+        .toc-content ul ul a {
             font-size: 0.75em;
             color: #7f8c8d;
-        }}
+        }
 
         /* Canvas and interactive elements */
-        canvas {{
+        canvas {
             border: 1px solid #e0e0e0;
             border-radius: 5px;
             background: white;
-        }}
+        }
 
-        input[type="range"] {{
+        input[type="range"] {
             width: 100%;
             cursor: pointer;
-        }}
+        }
 
-        input[type="button"] {{
+        input[type="button"] {
             padding: 0.6em 1.2em;
             background: #fcdfd9;
             color: #333;
@@ -323,57 +314,57 @@ HTML_TEMPLATE = '''<!DOCTYPE html>
             cursor: pointer;
             font-weight: 500;
             transition: background 0.2s ease;
-        }}
+        }
 
-        input[type="button"]:hover {{
+        input[type="button"]:hover {
             background: #f5b5a0;
-        }}
+        }
 
         /* Footnotes styling */
-        .footnote {{
+        .footnote {
             font-size: 0.9em;
             color: #7f8c8d;
-        }}
+        }
 
-        .footnotes {{
+        .footnotes {
             border-top: 1px solid #ecf0f1;
             margin-top: 2em;
             padding-top: 1em;
             font-size: 0.9em;
             color: #7f8c8d;
-        }}
+        }
 
-        .footnotes ol {{
+        .footnotes ol {
             margin: 0;
             padding-left: 1.5em;
-        }}
+        }
 
-        .footnotes li {{
+        .footnotes li {
             margin-bottom: 0.5em;
             line-height: 1.5;
-        }}
+        }
 
-        .footnotes p {{
+        .footnotes p {
             margin: 0;
             display: inline;
-        }}
+        }
 
-        sup a {{
+        sup a {
             color: #3498db;
             margin: 0 2px;
             font-size: 0.85em;
-        }}
+        }
 
-        sup a:hover {{
+        sup a:hover {
             color: #2980b9;
-        }}
+        }
 
         /* Sidenotes - positioned in right column */
-        .footnote {{
+        .footnote {
             display: none;
-        }}
+        }
 
-        .sidenote {{
+        .sidenote {
             position: absolute;
             width: 200px;
             font-size: 0.75em;
@@ -383,25 +374,25 @@ HTML_TEMPLATE = '''<!DOCTYPE html>
             margin-bottom: 1em;
             border-left: 2px solid #ecf0f1;
             padding-left: 0.8em;
-        }}
+        }
 
-        .sidenote-num {{
+        .sidenote-num {
             font-weight: 700;
             color: #3498db;
             margin-right: 0.3em;
-        }}
+        }
 
-        @media (max-width: 1100px) {{
-            .sidenote {{
+        @media (max-width: 1100px) {
+            .sidenote {
                 display: none;
-            }}
-        }}
+            }
+        }
     </style>
     <!-- MathJax for LaTeX/Math notation -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {{
+        document.addEventListener('DOMContentLoaded', function() {
             const footnoteDiv = document.querySelector('.footnote');
             const sidenoteColumn = document.querySelector('.sidenote-column');
             const article = document.querySelector('article');
@@ -412,11 +403,11 @@ HTML_TEMPLATE = '''<!DOCTYPE html>
             const articleTop = article.offsetTop;
 
             // First pass: create all sidenotes
-            footnotes.forEach((fn, index) => {{
+            footnotes.forEach((fn, index) => {
                 const id = fn.id;
                 const ref = document.querySelector('a[href="#' + id + '"]');
 
-                if (ref) {{
+                if (ref) {
                     // Create sidenote
                     const sidenote = document.createElement('div');
                     sidenote.className = 'sidenote';
@@ -441,35 +432,35 @@ HTML_TEMPLATE = '''<!DOCTYPE html>
                     sidenoteColumn.appendChild(sidenote);
 
                     // Store sidenote info for overlap detection
-                    sidenotes.push({{
+                    sidenotes.push({
                         element: sidenote,
                         refPos: refPos
-                    }});
-                }}
-            }});
+                    });
+                }
+            });
 
             // Second pass: adjust positions to avoid overlap
-            sidenotes.forEach((sn, i) => {{
+            sidenotes.forEach((sn, i) => {
                 const sidenote = sn.element;
                 const sidenoteHeight = sidenote.offsetHeight || 100;
                 let desiredTop = sn.refPos;
 
                 // Check overlap with previous sidenotes
-                for (let j = 0; j < i; j++) {{
+                for (let j = 0; j < i; j++) {
                     const prevSn = sidenotes[j];
                     const prevTop = parseFloat(prevSn.element.style.top);
                     const prevHeight = prevSn.element.offsetHeight || 100;
                     const prevBottom = prevTop + prevHeight + 10; // 10px gap
 
                     // If this sidenote would overlap, move it down
-                    if (desiredTop < prevBottom) {{
+                    if (desiredTop < prevBottom) {
                         desiredTop = prevBottom;
-                    }}
-                }}
+                    }
+                }
 
                 sidenote.style.top = desiredTop + 'px';
-            }});
-        }});
+            });
+        });
     </script>
 </head>
 <body>
@@ -477,18 +468,95 @@ HTML_TEMPLATE = '''<!DOCTYPE html>
         <div class="blog-wrapper">
             <article>
                 <div class="post-header">
-                    <h1 class="post-title">{title}</h1>
+                    <h1 class="post-title">Understanding Neural Networks with Footnotes</h1>
                     <div class="post-meta">
-                        {meta_info}
+                        Date: August 30, 2026 | Estimated Reading Time: 2 min | Author: Jaturong Kongmanee
                     </div>
                 </div>
-                {content}
-                {tags_html}
+                <h1 id="understanding-neural-networks-with-footnotes">Understanding Neural Networks with Footnotes</h1>
+<h2 id="introduction">Introduction</h2>
+<p>Neural networks have become the foundation of modern deep learning<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>. They are inspired by biological neural networks in animal brains<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>, and consist of interconnected nodes (neurons) that process information through weighted connections.</p>
+<h2 id="what-are-neural-networks">What are Neural Networks?</h2>
+<p>A neural network is a computational model inspired by biological neurons<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>. Each neuron receives inputs, applies a weight to each input, sums them up, and passes the result through an activation function<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup>.</p>
+<p>The basic structure consists of:
+- <strong>Input layer</strong>: Receives raw data
+- <strong>Hidden layers</strong>: Process information through learned weights
+- <strong>Output layer</strong>: Produces predictions</p>
+<h2 id="mathematical-foundation">Mathematical Foundation</h2>
+<p>The output of a single neuron is computed as:</p>
+<p>$$y = \sigma(w_1 x_1 + w_2 x_2 + \cdots + w_n x_n + b)$$</p>
+<p>where:
+- $x_i$ are the input values
+- $w_i$ are the weights
+- $b$ is the bias term
+- $\sigma$ is the activation function<sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup></p>
+<h2 id="training-neural-networks">Training Neural Networks</h2>
+<p>Neural networks are trained using backpropagation<sup id="fnref:6"><a class="footnote-ref" href="#fn:6">6</a></sup>, which calculates the gradient of the loss function with respect to each weight. This allows us to update weights in the direction that minimizes the loss:</p>
+<p>$$w_{new} = w_{old} - \eta \frac{\partial \mathcal{L}}{\partial w}$$</p>
+<p>where $\eta$ is the learning rate<sup id="fnref:7"><a class="footnote-ref" href="#fn:7">7</a></sup>.</p>
+<h2 id="activation-functions">Activation Functions</h2>
+<p>Common activation functions include<sup id="fnref:8"><a class="footnote-ref" href="#fn:8">8</a></sup>:</p>
+<ul>
+<li><strong>ReLU (Rectified Linear Unit)</strong>: $f(x) = \max(0, x)$</li>
+<li><strong>Sigmoid</strong>: $f(x) = \frac{1}{1 + e^{-x}}$</li>
+<li><strong>Tanh</strong>: $f(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}$</li>
+</ul>
+<p>Each has different properties and is suited for different scenarios<sup id="fnref:9"><a class="footnote-ref" href="#fn:9">9</a></sup>.</p>
+<h2 id="applications">Applications</h2>
+<p>Neural networks are used in numerous applications<sup id="fnref:10"><a class="footnote-ref" href="#fn:10">10</a></sup>:
+- Computer vision for image classification
+- Natural language processing for text analysis
+- Reinforcement learning for game playing
+- Time series forecasting</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Neural networks are powerful tools that have revolutionized machine learning<sup id="fnref:11"><a class="footnote-ref" href="#fn:11">11</a></sup>. Understanding their mathematical foundations is crucial for building effective models<sup id="fnref:12"><a class="footnote-ref" href="#fn:12">12</a></sup>.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>LeCun, Y., Bengio, Y., &amp; Hinton, G. (2015). "Deep learning." Nature, 521(7553), 436-444.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>McCulloch, W. S., &amp; Pitts, W. (1943). "A logical calculus of ideas immanent in nervous activity." The Bulletin of Mathematical Biophysics, 5(4), 115-133.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>The biological inspiration includes the structure of synapses and neurotransmitters in the brain.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>Common activation functions include ReLU, sigmoid, and tanh, each with different properties.&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p>The activation function introduces non-linearity, allowing networks to learn complex patterns.&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:6">
+<p>Rumelhart, D. E., Hinton, G. E., &amp; Williams, R. J. (1986). "Learning representations by back-propagating errors." Nature, 323(6088), 533-536.&#160;<a class="footnote-backref" href="#fnref:6" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:7">
+<p>The learning rate controls the size of weight updates and is a critical hyperparameter.&#160;<a class="footnote-backref" href="#fnref:7" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:8">
+<p>Different activation functions have different properties: ReLU is computationally efficient, sigmoid is bounded between 0 and 1, and tanh is bounded between -1 and 1.&#160;<a class="footnote-backref" href="#fnref:8" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+<li id="fn:9">
+<p>ReLU is popular in hidden layers due to its computational efficiency and effectiveness in deep networks.&#160;<a class="footnote-backref" href="#fnref:9" title="Jump back to footnote 9 in the text">&#8617;</a></p>
+</li>
+<li id="fn:10">
+<p>Modern deep learning applications extend far beyond traditional machine learning domains.&#160;<a class="footnote-backref" href="#fnref:10" title="Jump back to footnote 10 in the text">&#8617;</a></p>
+</li>
+<li id="fn:11">
+<p>The deep learning revolution has transformed fields like computer vision, NLP, and speech recognition.&#160;<a class="footnote-backref" href="#fnref:11" title="Jump back to footnote 11 in the text">&#8617;</a></p>
+</li>
+<li id="fn:12">
+<p>Understanding backpropagation, gradient descent, and the role of activation functions is essential for practitioners.&#160;<a class="footnote-backref" href="#fnref:12" title="Jump back to footnote 12 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                <div class="post-tags"><span class="tag">deep-learning</span><span class="tag">neural-networks</span><span class="tag">tutorial</span></div>
             </article>
 
             <aside class="toc-sidebar">
                 <div class="toc-content">
-                    {toc_html}
+                    <ul><li><a href="#introduction">Introduction</a></li><li><a href="#what-are-neural-networks">What are Neural Networks?</a></li><li><a href="#mathematical-foundation">Mathematical Foundation</a></li><li><a href="#training-neural-networks">Training Neural Networks</a></li><li><a href="#activation-functions">Activation Functions</a></li><li><a href="#applications">Applications</a></li><li><a href="#conclusion">Conclusion</a></li></ul>
                 </div>
             </aside>
 
@@ -496,158 +564,8 @@ HTML_TEMPLATE = '''<!DOCTYPE html>
         </div>
 
         <div class="back-link">
-            {back_link}
+            <a class="link" href="https://jaturongkongmanee.github.io/website/"><input type="button" value="Back to the main page"></a>
         </div>
     </div>
 </body>
-</html>'''
-
-
-def parse_frontmatter(content):
-    """Parse YAML-style frontmatter from markdown."""
-    if not content.startswith('---'):
-        return {}, content
-
-    lines = content.split('\n')
-    end_marker = -1
-
-    for i in range(1, len(lines)):
-        if lines[i].startswith('---'):
-            end_marker = i
-            break
-
-    if end_marker == -1:
-        return {}, content
-
-    frontmatter = {}
-    for line in lines[1:end_marker]:
-        if ':' in line:
-            key, value = line.split(':', 1)
-            frontmatter[key.strip()] = value.strip()
-
-    body = '\n'.join(lines[end_marker + 1:])
-    return frontmatter, body
-
-
-def extract_headings(html):
-    """Extract headings from HTML for table of contents."""
-    heading_pattern = r'<h([2-6]) id="([^"]*)"[^>]*>([^<]+)</h\1>'
-    headings = re.findall(heading_pattern, html)
-
-    if not headings:
-        return ""
-
-    toc_html = '<ul>'
-    current_level = 2
-
-    for level, heading_id, heading_text in headings:
-        level = int(level)
-
-        if level > current_level:
-            toc_html += '<ul>' * (level - current_level)
-        elif level < current_level:
-            toc_html += '</ul>' * (current_level - level)
-
-        current_level = level
-        toc_html += f'<li><a href="#{heading_id}">{heading_text}</a></li>'
-
-    toc_html += '</ul>' * (current_level - 2) + '</ul>'
-    return toc_html
-
-
-def generate_toc_extension():
-    """Generate table of contents with proper IDs."""
-    return toc.TocExtension(
-        permalink=False,
-        title='Table of Contents',
-        slugify=lambda value, separator: re.sub(r'[^\w\s-]', '', value).strip().lower().replace(' ', '-')
-    )
-
-
-if len(sys.argv) == 1:
-    print('Usage: python md_coverter.py <filename>.md')
-    print('Example: python md_coverter.py my_post.md')
-    print('\nFrontmatter format (optional):')
-    print('---')
-    print('title: My Blog Post Title')
-    print('date: 2026-08-30')
-    print('tags: machine-learning, python, tutorial')
-    print('author: Your Name')
-    print('---')
-    print('\nYour markdown content here...')
-    sys.exit()
-
-file_name, file_type = sys.argv[1].split(".")
-
-if file_type != 'md':
-    print('You have to provide a .md file')
-    sys.exit()
-
-with open(PATH + f'{file_name}.md', 'r') as f:
-    raw_content = f.read()
-
-# Parse frontmatter
-frontmatter, markdown_content = parse_frontmatter(raw_content)
-
-# Extract metadata
-title = frontmatter.get('title', file_name.replace('_', ' ').title())
-date_str = frontmatter.get('date', datetime.now().strftime('%Y-%m-%d'))
-tags = frontmatter.get('tags', '').split(',') if frontmatter.get('tags') else []
-author = frontmatter.get('author', 'Jaturong Kongmanee')
-
-# Convert markdown to HTML with footnotes support
-extensions = ['tables', 'fenced_code', 'footnotes', generate_toc_extension()]
-html_content = markdown.markdown(markdown_content, extensions=extensions)
-
-# Calculate reading time (assuming 200 words per minute)
-word_count = len(markdown_content.split())
-reading_time = max(1, round(word_count / 200))
-
-# Format date (parse and reformat to "Month Day, Year")
-try:
-    parsed_date = datetime.strptime(date_str, '%Y-%m-%d')
-    formatted_date = parsed_date.strftime('%B %d, %Y')
-except:
-    formatted_date = date_str
-
-# Extract and generate table of contents
-toc_html = extract_headings(html_content)
-if not toc_html:
-    toc_html = '<p style="color: #999; font-size: 0.8em;">No sections found</p>'
-
-# Build metadata info in new format
-meta_info = f'Date: {formatted_date}'
-if reading_time:
-    meta_info += f' | Estimated Reading Time: {reading_time} min'
-if author:
-    meta_info += f' | Author: {author}'
-
-# Build tags HTML
-tags_html = ''
-if tags:
-    tags_html = '<div class="post-tags">'
-    for tag in tags:
-        tag = tag.strip()
-        if tag:
-            tags_html += f'<span class="tag">{tag}</span>'
-    tags_html += '</div>'
-
-# Create full HTML
-full_html = HTML_TEMPLATE.format(
-    title=title,
-    content=html_content,
-    back_link=LINK_TO_MAIN_PAGE,
-    meta_info=meta_info,
-    tags_html=tags_html,
-    toc_html=toc_html
-)
-
-with open(PATH + f'{file_name}.html', 'w') as f:
-    f.write(full_html)
-
-print(f'✓ Successfully converted {file_name}.md to {file_name}.html')
-print(f'  Title: {title}')
-print(f'  Date: {formatted_date}')
-print(f'  Reading Time: {reading_time} min')
-if tags:
-    print(f'  Tags: {", ".join([t.strip() for t in tags])}')
+</html>

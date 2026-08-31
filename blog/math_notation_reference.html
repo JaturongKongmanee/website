@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Notation Reference</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../stylesheet.css">
+    <style>
+        body {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        h1, h2, h3 { margin-top: 1.5em; margin-bottom: 0.5em; }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 12px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .post-meta {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .back-link {
+            margin-bottom: 2em;
+        }
+    </style>
+    <!-- MathJax for LaTeX/Math notation -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="back-link">
+        <a class="link" href="https://jaturongkongmanee.github.io/website/"><input type="button" value="Back to the main page"></a>
+    </div>
+    <article>
+        <h1 id="mathematical-notation-reference-guide">Mathematical Notation Reference Guide</h1>
+<p>A comprehensive guide to common mathematical notations used in research, machine learning, and scientific writing. Each notation includes its LaTeX syntax, description, and typical usage domains.</p>
+<hr />
+<h2 id="1-greek-letters">1. Greek Letters</h2>
+<p>Used extensively across mathematics, physics, and engineering.</p>
+<table>
+<thead>
+<tr>
+<th>Notation</th>
+<th>LaTeX</th>
+<th>Name</th>
+<th>Domain</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$\alpha$</td>
+<td><code>\alpha</code></td>
+<td>Alpha</td>
+<td>Angles, coefficients, learning rate</td>
+<td>$\alpha = 0.01$ (learning rate in ML)</td>
+</tr>
+<tr>
+<td>$\beta$</td>
+<td><code>\beta</code></td>
+<td>Beta</td>
+<td>Regression coefficients, angles</td>
+<td>$\beta_1, \beta_2$ (slopes in regression)</td>
+</tr>
+<tr>
+<td>$\gamma$</td>
+<td><code>\gamma</code></td>
+<td>Gamma</td>
+<td>Decay factor, Lorentz factor</td>
+<td>$\gamma = 0.99$ (discount factor)</td>
+</tr>
+<tr>
+<td>$\delta$</td>
+<td><code>\delta</code></td>
+<td>Delta</td>
+<td>Small change, Dirac delta</td>
+<td>$\delta x$ (change in x)</td>
+</tr>
+<tr>
+<td>$\epsilon$</td>
+<td><code>\epsilon</code></td>
+<td>Epsilon</td>
+<td>Error term, small value</td>
+<td>$\epsilon &gt; 0$ (tolerance)</td>
+</tr>
+<tr>
+<td>$\zeta$</td>
+<td><code>\zeta</code></td>
+<td>Zeta</td>
+<td>Riemann zeta function</td>
+<td>$\zeta(s)$ (zeta function)</td>
+</tr>
+<tr>
+<td>$\eta$</td>
+<td><code>\eta</code></td>
+<td>Eta</td>
+<td>Learning rate, efficiency</td>
+<td>$\eta = 0.001$ (learning rate)</td>
+</tr>
+<tr>
+<td>$\theta$</td>
+<td><code>\theta</code></td>
+<td>Theta</td>
+<td>Angles, model parameters</td>
+<td>$\theta = [\theta_1, \theta_2, \ldots]$</td>
+</tr>
+<tr>
+<td>$\lambda$</td>
+<td><code>\lambda</code></td>
+<td>Lambda</td>
+<td>Wavelength, regularization</td>
+<td>$\lambda = 0.01$ (L2 regularization)</td>
+</tr>
+<tr>
+<td>$\mu$</td>
+<td><code>\mu</code></td>
+<td>Mu</td>
+<td>Mean, average</td>
+<td>$\mu = E[X]$ (expected value)</td>
+</tr>
+<tr>
+<td>$\sigma$</td>
+<td><code>\sigma</code></td>
+<td>Sigma</td>
+<td>Standard deviation, summation</td>
+<td>$\sigma^2$ (variance)</td>
+</tr>
+<tr>
+<td>$\rho$</td>
+<td><code>\rho</code></td>
+<td>Rho</td>
+<td>Correlation, density</td>
+<td>$\rho(X,Y)$ (correlation)</td>
+</tr>
+<tr>
+<td>$\phi$</td>
+<td><code>\phi</code></td>
+<td>Phi</td>
+<td>Golden ratio, features</td>
+<td>$\phi(x)$ (feature map)</td>
+</tr>
+<tr>
+<td>$\psi$</td>
+<td><code>\psi</code></td>
+<td>Psi</td>
+<td>Wave function, function</td>
+<td>$\psi(x)$ (quantum wave function)</td>
+</tr>
+<tr>
+<td>$\omega$</td>
+<td><code>\omega</code></td>
+<td>Omega</td>
+<td>Angular frequency, weights</td>
+<td>$\omega$ (neural network weights)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-set-theory-logic">2. Set Theory &amp; Logic</h2>
+<p>Fundamental notation for describing collections and logical operations.</p>
+<table>
+<thead>
+<tr>
+<th>Notation</th>
+<th>LaTeX</th>
+<th>Meaning</th>
+<th>Domain</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$\in$</td>
+<td><code>\in</code></td>
+<td>Element of</td>
+<td>Set theory</td>
+<td>$x \in S$ (x is in set S)</td>
+</tr>
+<tr>
+<td>$\notin$</td>
+<td><code>\notin</code></td>
+<td>Not element of</td>
+<td>Set theory</td>
+<td>$x \notin \mathbb{R}$</td>
+</tr>
+<tr>
+<td>$\subset$</td>
+<td><code>\subset</code></td>
+<td>Subset of</td>
+<td>Set theory</td>
+<td>$A \subset B$</td>
+</tr>
+<tr>
+<td>$\subseteq$</td>
+<td><code>\subseteq</code></td>
+<td>Subset or equal</td>
+<td>Set theory</td>
+<td>$A \subseteq B$</td>
+</tr>
+<tr>
+<td>$\cup$</td>
+<td><code>\cup</code></td>
+<td>Union</td>
+<td>Set theory</td>
+<td>$A \cup B$ (all elements in A or B)</td>
+</tr>
+<tr>
+<td>$\cap$</td>
+<td><code>\cap</code></td>
+<td>Intersection</td>
+<td>Set theory</td>
+<td>$A \cap B$ (elements in both)</td>
+</tr>
+<tr>
+<td>$\setminus$</td>
+<td><code>\setminus</code></td>
+<td>Set difference</td>
+<td>Set theory</td>
+<td>$A \setminus B$</td>
+</tr>
+<tr>
+<td>$\emptyset$</td>
+<td><code>\emptyset</code></td>
+<td>Empty set</td>
+<td>Set theory</td>
+<td>$A \cap B = \emptyset$</td>
+</tr>
+<tr>
+<td>$\forall$</td>
+<td><code>\forall</code></td>
+<td>For all</td>
+<td>Logic</td>
+<td>$\forall x \in \mathbb{R}$</td>
+</tr>
+<tr>
+<td>$\exists$</td>
+<td><code>\exists</code></td>
+<td>There exists</td>
+<td>Logic</td>
+<td>$\exists x$ such that</td>
+</tr>
+<tr>
+<td>$\neg$</td>
+<td><code>\neg</code></td>
+<td>Not (negation)</td>
+<td>Logic</td>
+<td>$\neg P$ (not P)</td>
+</tr>
+<tr>
+<td>$\Rightarrow$</td>
+<td><code>\Rightarrow</code></td>
+<td>Implies</td>
+<td>Logic</td>
+<td>$P \Rightarrow Q$</td>
+</tr>
+<tr>
+<td>$\Leftrightarrow$</td>
+<td><code>\Leftrightarrow</code></td>
+<td>If and only if</td>
+<td>Logic</td>
+<td>$P \Leftrightarrow Q$</td>
+</tr>
+<tr>
+<td>$\land$</td>
+<td><code>\land</code></td>
+<td>And</td>
+<td>Logic</td>
+<td>$P \land Q$</td>
+</tr>
+<tr>
+<td>$\lor$</td>
+<td><code>\lor</code></td>
+<td>Or</td>
+<td>Logic</td>
+<td>$P \lor Q$</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-calculus-analysis">3. Calculus &amp; Analysis</h2>
+<p>Essential for continuous mathematics, optimization, and physics.</p>
+<table>
+<thead>
+<tr>
+<th>Notation</th>
+<th>LaTeX</th>
+<th>Meaning</th>
+<th>Domain</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$\frac{d}{dx}$</td>
+<td><code>\frac{d}{dx}</code></td>
+<td>Derivative</td>
+<td>Calculus</td>
+<td>$\frac{df}{dx} = 2x$</td>
+</tr>
+<tr>
+<td>$\frac{\partial}{\partial x}$</td>
+<td><code>\frac{\partial}{\partial x}</code></td>
+<td>Partial derivative</td>
+<td>Multivariable calculus</td>
+<td>$\frac{\partial f}{\partial x}$</td>
+</tr>
+<tr>
+<td>$\nabla$</td>
+<td><code>\nabla</code></td>
+<td>Gradient</td>
+<td>Vector calculus</td>
+<td>$\nabla f$ (gradient of f)</td>
+</tr>
+<tr>
+<td>$\nabla^2$</td>
+<td><code>\nabla^2</code></td>
+<td>Laplacian</td>
+<td>Vector calculus</td>
+<td>$\nabla^2 f$ (Laplacian)</td>
+</tr>
+<tr>
+<td>$\int$</td>
+<td><code>\int</code></td>
+<td>Integral</td>
+<td>Calculus</td>
+<td>$\int_0^1 f(x)dx$</td>
+</tr>
+<tr>
+<td>$\iint$</td>
+<td><code>\iint</code></td>
+<td>Double integral</td>
+<td>Multivariable calculus</td>
+<td>$\iint_D f(x,y)dA$</td>
+</tr>
+<tr>
+<td>$\oint$</td>
+<td><code>\oint</code></td>
+<td>Line integral</td>
+<td>Vector calculus</td>
+<td>$\oint_C \vec{F} \cdot d\vec{r}$</td>
+</tr>
+<tr>
+<td>$\sum$</td>
+<td><code>\sum</code></td>
+<td>Summation</td>
+<td>Discrete math</td>
+<td>$\sum_{i=1}^n x_i$</td>
+</tr>
+<tr>
+<td>$\prod$</td>
+<td><code>\prod</code></td>
+<td>Product</td>
+<td>Discrete math</td>
+<td>$\prod_{i=1}^n x_i$</td>
+</tr>
+<tr>
+<td>$\lim$</td>
+<td><code>\lim</code></td>
+<td>Limit</td>
+<td>Analysis</td>
+<td>$\lim_{x \to \infty} f(x)$</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-linear-algebra">4. Linear Algebra</h2>
+<p>Critical for machine learning, computer graphics, and scientific computing.</p>
+<table>
+<thead>
+<tr>
+<th>Notation</th>
+<th>LaTeX</th>
+<th>Meaning</th>
+<th>Domain</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$\mathbf{A}$</td>
+<td><code>\mathbf{A}</code></td>
+<td>Matrix (bold)</td>
+<td>Linear algebra</td>
+<td>$\mathbf{A} \in \mathbb{R}^{m \times n}$</td>
+</tr>
+<tr>
+<td>$\mathbf{v}$</td>
+<td><code>\mathbf{v}</code></td>
+<td>Vector</td>
+<td>Linear algebra</td>
+<td>$\mathbf{v} = [v_1, v_2, \ldots]^T$</td>
+</tr>
+<tr>
+<td>$\mathbf{A}^T$</td>
+<td><code>\mathbf{A}^T</code></td>
+<td>Transpose</td>
+<td>Linear algebra</td>
+<td>$\mathbf{A}^T$ (transpose of A)</td>
+</tr>
+<tr>
+<td>$\mathbf{A}^{-1}$</td>
+<td><code>\mathbf{A}^{-1}</code></td>
+<td>Matrix inverse</td>
+<td>Linear algebra</td>
+<td>$\mathbf{A}\mathbf{A}^{-1} = \mathbf{I}$</td>
+</tr>
+<tr>
+<td>$\det(\mathbf{A})$</td>
+<td><code>\det(\mathbf{A})</code></td>
+<td>Determinant</td>
+<td>Linear algebra</td>
+<td>$\det(\mathbf{A}) \neq 0$ (invertible)</td>
+</tr>
+<tr>
+<td>$\text{tr}(\mathbf{A})$</td>
+<td><code>\text{tr}(\mathbf{A})</code></td>
+<td>Trace</td>
+<td>Linear algebra</td>
+<td>$\text{tr}(\mathbf{A}) = \sum_{i} A_{ii}$</td>
+</tr>
+<tr>
+<td>$|\mathbf{v}|$</td>
+<td><code>\|\mathbf{v}\|</code></td>
+<td>Vector norm</td>
+<td>Linear algebra</td>
+<td>$|\mathbf{v}|_2 = \sqrt{\sum v_i^2}$ (L2 norm)</td>
+</tr>
+<tr>
+<td>$\langle \mathbf{u}, \mathbf{v} \rangle$</td>
+<td><code>\langle \mathbf{u}, \mathbf{v} \rangle</code></td>
+<td>Inner product</td>
+<td>Linear algebra</td>
+<td>$\langle \mathbf{u}, \mathbf{v} \rangle = \mathbf{u}^T\mathbf{v}$</td>
+</tr>
+<tr>
+<td>$\mathbf{A} \otimes \mathbf{B}$</td>
+<td><code>\mathbf{A} \otimes \mathbf{B}</code></td>
+<td>Kronecker product</td>
+<td>Linear algebra</td>
+<td>Tensor operations</td>
+</tr>
+<tr>
+<td>$\lambda_i$</td>
+<td><code>\lambda_i</code></td>
+<td>Eigenvalue</td>
+<td>Linear algebra</td>
+<td>$\mathbf{A}\mathbf{v} = \lambda \mathbf{v}$</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5-probability-statistics">5. Probability &amp; Statistics</h2>
+<p>Fundamental for machine learning, Bayesian methods, and statistical analysis.</p>
+<table>
+<thead>
+<tr>
+<th>Notation</th>
+<th>LaTeX</th>
+<th>Meaning</th>
+<th>Domain</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$P(X)$</td>
+<td><code>P(X)</code></td>
+<td>Probability</td>
+<td>Probability</td>
+<td>$P(X=1) = 0.5$</td>
+</tr>
+<tr>
+<td>$P(A \mid B)$</td>
+<td><code>P(A \mid B)</code></td>
+<td>Conditional probability</td>
+<td>Probability</td>
+<td>$P(Y\mid X)$ (likelihood)</td>
+</tr>
+<tr>
+<td>$\sim$</td>
+<td><code>\sim</code></td>
+<td>Distributed as</td>
+<td>Statistics</td>
+<td>$X \sim \mathcal{N}(0,1)$ (normal distribution)</td>
+</tr>
+<tr>
+<td>$E[X]$</td>
+<td><code>E[X]</code></td>
+<td>Expected value</td>
+<td>Statistics</td>
+<td>$E[X] = \mu$ (mean)</td>
+</tr>
+<tr>
+<td>$\text{Var}(X)$</td>
+<td><code>\text{Var}(X)</code></td>
+<td>Variance</td>
+<td>Statistics</td>
+<td>$\text{Var}(X) = E[(X-\mu)^2]$</td>
+</tr>
+<tr>
+<td>$\text{Cov}(X,Y)$</td>
+<td><code>\text{Cov}(X,Y)</code></td>
+<td>Covariance</td>
+<td>Statistics</td>
+<td>$\text{Cov}(X,Y) = E[(X-\mu_X)(Y-\mu_Y)]$</td>
+</tr>
+<tr>
+<td>$\mathcal{N}(\mu, \sigma^2)$</td>
+<td><code>\mathcal{N}(\mu, \sigma^2)</code></td>
+<td>Normal distribution</td>
+<td>Statistics</td>
+<td>Gaussian distribution</td>
+</tr>
+<tr>
+<td>$\mathcal{U}(a,b)$</td>
+<td><code>\mathcal{U}(a,b)</code></td>
+<td>Uniform distribution</td>
+<td>Statistics</td>
+<td>Uniform on [a,b]</td>
+</tr>
+<tr>
+<td>$\mathcal{B}(n,p)$</td>
+<td><code>\mathcal{B}(n,p)</code></td>
+<td>Binomial distribution</td>
+<td>Statistics</td>
+<td>Bernoulli trials</td>
+</tr>
+<tr>
+<td>$\propto$</td>
+<td><code>\propto</code></td>
+<td>Proportional to</td>
+<td>Bayesian inference</td>
+<td>$P(\theta\mid D) \propto P(D\mid\theta)P(\theta)$</td>
+</tr>
+<tr>
+<td>$\argmax$</td>
+<td><code>\argmax</code></td>
+<td>Argument of maximum</td>
+<td>Optimization</td>
+<td>$\theta^* = \argmax_\theta L(\theta)$</td>
+</tr>
+<tr>
+<td>$\argmin$</td>
+<td><code>\argmin</code></td>
+<td>Argument of minimum</td>
+<td>Optimization</td>
+<td>$\hat{\theta} = \argmin_\theta \mathcal{L}(\theta)$</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6-machine-learning-optimization">6. Machine Learning &amp; Optimization</h2>
+<p>Common notation in ML papers and implementations.</p>
+<table>
+<thead>
+<tr>
+<th>Notation</th>
+<th>LaTeX</th>
+<th>Meaning</th>
+<th>Domain</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$\mathcal{L}$</td>
+<td><code>\mathcal{L}</code></td>
+<td>Loss function</td>
+<td>Machine learning</td>
+<td>$\mathcal{L}(\hat{y}, y)$ (cross-entropy)</td>
+</tr>
+<tr>
+<td>$\mathcal{D}$</td>
+<td><code>\mathcal{D}</code></td>
+<td>Dataset</td>
+<td>Machine learning</td>
+<td>$\mathcal{D} = {(x_i, y_i)}_{i=1}^N$</td>
+</tr>
+<tr>
+<td>$\hat{y}$</td>
+<td><code>\hat{y}</code></td>
+<td>Predicted value</td>
+<td>Machine learning</td>
+<td>$\hat{y} = f(x; \theta)$</td>
+</tr>
+<tr>
+<td>$y$</td>
+<td><code>y</code></td>
+<td>True label</td>
+<td>Machine learning</td>
+<td>Ground truth</td>
+</tr>
+<tr>
+<td>$\mathbb{E}_{x \sim p}$</td>
+<td><code>\mathbb{E}_{x \sim p}</code></td>
+<td>Expectation over distribution</td>
+<td>Probability</td>
+<td>$\mathbb{E}_{x \sim \mathcal{D}}[\mathcal{L}]$</td>
+</tr>
+<tr>
+<td>$\nabla_\theta$</td>
+<td><code>\nabla_\theta</code></td>
+<td>Gradient w.r.t. $\theta$</td>
+<td>Optimization</td>
+<td>$\nabla_\theta \mathcal{L}$ (gradient descent)</td>
+</tr>
+<tr>
+<td>$\theta \leftarrow$</td>
+<td><code>\theta \leftarrow</code></td>
+<td>Update assignment</td>
+<td>Algorithm</td>
+<td>$\theta \leftarrow \theta - \eta \nabla_\theta \mathcal{L}$</td>
+</tr>
+<tr>
+<td>$f: X \to Y$</td>
+<td><code>f: X \to Y</code></td>
+<td>Function mapping</td>
+<td>Set theory</td>
+<td>Maps from X to Y</td>
+</tr>
+<tr>
+<td>$\circ$</td>
+<td><code>\circ</code></td>
+<td>Function composition</td>
+<td>Algebra</td>
+<td>$(f \circ g)(x) = f(g(x))$</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="7-special-constants-sets">7. Special Constants &amp; Sets</h2>
+<p>Standard mathematical objects and number systems.</p>
+<table>
+<thead>
+<tr>
+<th>Notation</th>
+<th>LaTeX</th>
+<th>Meaning</th>
+<th>Domain</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$\mathbb{R}$</td>
+<td><code>\mathbb{R}</code></td>
+<td>Real numbers</td>
+<td>Analysis</td>
+<td>$x \in \mathbb{R}$</td>
+</tr>
+<tr>
+<td>$\mathbb{C}$</td>
+<td><code>\mathbb{C}</code></td>
+<td>Complex numbers</td>
+<td>Algebra</td>
+<td>$z \in \mathbb{C}$</td>
+</tr>
+<tr>
+<td>$\mathbb{Z}$</td>
+<td><code>\mathbb{Z}</code></td>
+<td>Integers</td>
+<td>Number theory</td>
+<td>$n \in \mathbb{Z}$</td>
+</tr>
+<tr>
+<td>$\mathbb{N}$</td>
+<td><code>\mathbb{N}</code></td>
+<td>Natural numbers</td>
+<td>Number theory</td>
+<td>$n \in \mathbb{N}$</td>
+</tr>
+<tr>
+<td>$\mathbb{Q}$</td>
+<td><code>\mathbb{Q}</code></td>
+<td>Rational numbers</td>
+<td>Number theory</td>
+<td>$\frac{a}{b} \in \mathbb{Q}$</td>
+</tr>
+<tr>
+<td>$\infty$</td>
+<td><code>\infty</code></td>
+<td>Infinity</td>
+<td>Analysis</td>
+<td>$\lim_{n \to \infty}$</td>
+</tr>
+<tr>
+<td>$\pi$</td>
+<td><code>\pi</code></td>
+<td>Pi</td>
+<td>Geometry</td>
+<td>$\pi \approx 3.14159$</td>
+</tr>
+<tr>
+<td>$e$</td>
+<td><code>e</code></td>
+<td>Euler's number</td>
+<td>Analysis</td>
+<td>$e^x = \sum_{n=0}^\infty \frac{x^n}{n!}$</td>
+</tr>
+<tr>
+<td>$i$</td>
+<td><code>i</code></td>
+<td>Imaginary unit</td>
+<td>Complex analysis</td>
+<td>$i^2 = -1$</td>
+</tr>
+<tr>
+<td>$\bot$</td>
+<td><code>\bot</code></td>
+<td>Orthogonal/perpendicular</td>
+<td>Linear algebra</td>
+<td>$\mathbf{u} \bot \mathbf{v}$</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="8-common-functions">8. Common Functions</h2>
+<p>Functions frequently appearing in ML and scientific contexts.</p>
+<table>
+<thead>
+<tr>
+<th>Notation</th>
+<th>LaTeX</th>
+<th>Meaning</th>
+<th>Domain</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$\exp(x)$ or $e^x$</td>
+<td><code>\exp(x)</code></td>
+<td>Exponential</td>
+<td>Analysis</td>
+<td>Softmax: $\frac{\exp(x_i)}{\sum_j \exp(x_j)}$</td>
+</tr>
+<tr>
+<td>$\log(x)$</td>
+<td><code>\log(x)</code></td>
+<td>Natural logarithm</td>
+<td>Analysis</td>
+<td>Information theory</td>
+</tr>
+<tr>
+<td>$\log_2(x)$</td>
+<td><code>\log_2(x)</code></td>
+<td>Log base 2</td>
+<td>Computer science</td>
+<td>Bits of information</td>
+</tr>
+<tr>
+<td>$\ln(x)$</td>
+<td><code>\ln(x)</code></td>
+<td>Natural logarithm</td>
+<td>Analysis</td>
+<td>$\ln(e) = 1$</td>
+</tr>
+<tr>
+<td>$\sin(x)$, $\cos(x)$, $\tan(x)$</td>
+<td><code>\sin(x)</code></td>
+<td>Trigonometric</td>
+<td>Signal processing</td>
+<td>Fourier analysis</td>
+</tr>
+<tr>
+<td>$\sqrt{x}$</td>
+<td><code>\sqrt{x}</code></td>
+<td>Square root</td>
+<td>Algebra</td>
+<td>$\sqrt{4} = 2$</td>
+</tr>
+<tr>
+<td>$|x|$</td>
+<td><code>\|x\|</code></td>
+<td>Absolute value / norm</td>
+<td>Algebra</td>
+<td>Distance metric</td>
+</tr>
+<tr>
+<td>$\max(a,b)$</td>
+<td><code>\max(a,b)</code></td>
+<td>Maximum</td>
+<td>Optimization</td>
+<td>ReLU: $\max(0, x)$</td>
+</tr>
+<tr>
+<td>$\min(a,b)$</td>
+<td><code>\min(a,b)</code></td>
+<td>Minimum</td>
+<td>Optimization</td>
+<td>Min pooling</td>
+</tr>
+<tr>
+<td>$\text{sign}(x)$</td>
+<td><code>\text{sign}(x)</code></td>
+<td>Sign function</td>
+<td>Algebra</td>
+<td>$\text{sign}(x) \in {-1, 0, 1}$</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="9-common-distributions-functions">9. Common Distributions &amp; Functions</h2>
+<p>Probability distributions and special functions in ML.</p>
+<table>
+<thead>
+<tr>
+<th>Notation</th>
+<th>LaTeX</th>
+<th>Description</th>
+<th>Formula</th>
+<th>Domain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gaussian/Normal</td>
+<td><code>\mathcal{N}(\mu, \sigma^2)</code></td>
+<td>Bell curve</td>
+<td>$\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$</td>
+<td>Statistics</td>
+</tr>
+<tr>
+<td>Softmax</td>
+<td><code>\text{softmax}(x_i)</code></td>
+<td>Probability distribution</td>
+<td>$\frac{e^{x_i}}{\sum_j e^{x_j}}$</td>
+<td>Neural networks</td>
+</tr>
+<tr>
+<td>Sigmoid</td>
+<td><code>\sigma(x)</code></td>
+<td>Logistic function</td>
+<td>$\frac{1}{1+e^{-x}}$</td>
+<td>Classification</td>
+</tr>
+<tr>
+<td>ReLU</td>
+<td><code>\text{ReLU}(x)</code></td>
+<td>Rectified linear</td>
+<td>$\max(0, x)$</td>
+<td>Deep learning</td>
+</tr>
+<tr>
+<td>Tanh</td>
+<td>`\tanh(x)$</td>
+<td>Hyperbolic tangent</td>
+<td>$\frac{e^x - e^{-x}}{e^x + e^{-x}}$</td>
+<td>Neural networks</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="10-indexing-notation-conventions">10. Indexing &amp; Notation Conventions</h2>
+<p>Common ways to denote multiple variables and dimensions.</p>
+<table>
+<thead>
+<tr>
+<th>Notation</th>
+<th>LaTeX</th>
+<th>Meaning</th>
+<th>Domain</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$x_i$</td>
+<td><code>x_i</code></td>
+<td>Subscript (i-th element)</td>
+<td>Indexing</td>
+<td>$x_1, x_2, \ldots, x_n$</td>
+</tr>
+<tr>
+<td>$x^{(i)}$</td>
+<td><code>x^{(i)}</code></td>
+<td>Superscript (i-th sample)</td>
+<td>Data indexing</td>
+<td>$(x^{(1)}, y^{(1)}), \ldots, (x^{(n)}, y^{(n)})$</td>
+</tr>
+<tr>
+<td>$x_{ij}$</td>
+<td><code>x_{ij}</code></td>
+<td>Matrix element</td>
+<td>Matrix notation</td>
+<td>$A_{ij}$ (element at row i, col j)</td>
+</tr>
+<tr>
+<td>$\mathbf{x}_{:,j}$</td>
+<td><code>\mathbf{x}_{:,j}</code></td>
+<td>Column j of matrix</td>
+<td>Matrix slicing</td>
+<td>All rows, column j</td>
+</tr>
+<tr>
+<td>$\mathbf{x}_{i,:}$</td>
+<td><code>\mathbf{x}_{i,:}</code></td>
+<td>Row i of matrix</td>
+<td>Matrix slicing</td>
+<td>Row i, all columns</td>
+</tr>
+<tr>
+<td>$\left[ \cdot \right]$</td>
+<td><code>\left[ \cdot \right]</code></td>
+<td>Matrix brackets</td>
+<td>Linear algebra</td>
+<td>$\left[\begin{matrix} a &amp; b \ c &amp; d \end{matrix}\right]$</td>
+</tr>
+<tr>
+<td>$(\cdot)$</td>
+<td><code>(\cdot)</code></td>
+<td>Parentheses</td>
+<td>General</td>
+<td>$(a + b)c$</td>
+</tr>
+<tr>
+<td>${\cdot}$</td>
+<td><code>\{\cdot\}</code></td>
+<td>Set braces</td>
+<td>Set theory</td>
+<td>${1, 2, 3}$</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="11-quick-reference-common-ml-equations">11. Quick Reference: Common ML Equations</h2>
+<h3 id="linear-regression">Linear Regression</h3>
+<p>$$\hat{y} = \mathbf{w}^T\mathbf{x} + b$$</p>
+<h3 id="gradient-descent-update">Gradient Descent Update</h3>
+<p>$$\theta \leftarrow \theta - \eta \nabla_\theta \mathcal{L}(\theta)$$</p>
+<h3 id="cross-entropy-loss">Cross-Entropy Loss</h3>
+<p>$$\mathcal{L} = -\sum_{i=1}^C y_i \log(\hat{y}_i)$$</p>
+<h3 id="gaussian-distribution">Gaussian Distribution</h3>
+<p>$$\mathcal{N}(x; \mu, \sigma^2) = \frac{1}{\sigma\sqrt{2\pi}} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)$$</p>
+<h3 id="bayes-theorem">Bayes' Theorem</h3>
+<p>$$P(\theta|D) = \frac{P(D|\theta)P(\theta)}{P(D)}$$</p>
+<h3 id="kl-divergence">KL Divergence</h3>
+<p>$$D_{KL}(P | Q) = \sum_x P(x) \log\frac{P(x)}{Q(x)}$$</p>
+<hr />
+<h2 id="12-tips-for-writing-math-in-markdown">12. Tips for Writing Math in Markdown</h2>
+<h3 id="inline-math">Inline Math</h3>
+<p>Use single dollar signs: <code>$E = mc^2$</code> renders as $E = mc^2$</p>
+<h3 id="display-math-block">Display Math (Block)</h3>
+<p>Use double dollar signs:</p>
+<pre><code>$$\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}$$
+</code></pre>
+<p>Renders as:
+$$\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}$$</p>
+<h3 id="common-patterns">Common Patterns</h3>
+<p><strong>Fractions:</strong></p>
+<pre><code>$\frac{a}{b}$ renders as $\frac{a}{b}$
+</code></pre>
+<p><strong>Superscripts &amp; Subscripts:</strong></p>
+<pre><code>$x^2$ for $x^2$ (superscript)
+$x_i$ for $x_i$ (subscript)
+$x_i^2$ for $x_i^2$ (both)
+</code></pre>
+<p><strong>Summation:</strong></p>
+<pre><code>$\sum_{i=1}^{n} x_i$ renders as $\sum_{i=1}^{n} x_i$
+</code></pre>
+<p><strong>Integrals:</strong></p>
+<pre><code>$\int_a^b f(x)dx$ renders as $\int_a^b f(x)dx$
+</code></pre>
+<p><strong>Framed equations:</strong></p>
+<pre><code>$$\boxed{E = mc^2}$$
+</code></pre>
+<hr />
+<h2 id="13-resources-tools">13. Resources &amp; Tools</h2>
+<ul>
+<li><strong>Desmos Calculator</strong>: Interactive graphing - https://www.desmos.com/calculator</li>
+<li><strong>Wolfram Alpha</strong>: Computational knowledge engine - https://www.wolframalpha.com</li>
+<li><strong>LaTeX Math Symbols</strong>: Complete reference - https://www.overleaf.com/learn/latex/Mathematical_expressions</li>
+<li><strong>MathJax Documentation</strong>: https://docs.mathjax.org/</li>
+<li><strong>Equation Editor</strong>: Online LaTeX editor - https://www.codecogs.com/latex/eqneditor.php</li>
+</ul>
+<hr />
+<h2 id="final-notes">Final Notes</h2>
+<p>When writing blog posts:
+1. <strong>Be consistent</strong> - Use the same notation throughout a post
+2. <strong>Define terms</strong> - Always define notation when first introducing it
+3. <strong>Use context</strong> - Let the domain guide your notation choice
+4. <strong>Test rendering</strong> - Preview your math before publishing
+5. <strong>Keep it simple</strong> - Prefer clarity over fancy notation</p>
+<p>This reference should help you write mathematically rich blog posts with proper notation!</p>
+    </article>
+    <div class="back-link">
+        <a class="link" href="https://jaturongkongmanee.github.io/website/"><input type="button" value="Back to the main page"></a>
+    </div>
+</body>
+</html>

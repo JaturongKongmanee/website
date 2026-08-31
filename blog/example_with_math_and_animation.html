@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example With Math And Animation</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../stylesheet.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fafafa;
+        }
+
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .back-link {
+            margin-bottom: 2em;
+        }
+
+        .blog-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 40px;
+            margin-bottom: 3em;
+        }
+
+        @media (max-width: 900px) {
+            .blog-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .toc-sidebar {
+                position: static;
+                margin-top: 3em;
+                padding: 20px;
+                background: #f9f9f9;
+                border-radius: 5px;
+            }
+        }
+
+        article {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .post-header {
+            margin-bottom: 2em;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 1.5em;
+        }
+
+        .post-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin: 0 0 0.3em 0;
+            color: #2c3e50;
+            line-height: 1.2;
+        }
+
+        .post-meta {
+            color: #7f8c8d;
+            font-size: 0.95em;
+            display: flex;
+            gap: 1.5em;
+            flex-wrap: wrap;
+            margin-bottom: 1em;
+        }
+
+        .post-date {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+
+        .post-tags {
+            display: flex;
+            gap: 0.5em;
+            flex-wrap: wrap;
+            margin-top: 0.5em;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #e8f4f8;
+            color: #2980b9;
+            padding: 0.3em 0.8em;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 500;
+            text-decoration: none;
+            border: 1px solid #b8dbe8;
+            transition: all 0.2s ease;
+        }
+
+        .tag:hover {
+            background: #2980b9;
+            color: white;
+            border-color: #2980b9;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 1.8em;
+            margin-bottom: 0.6em;
+            font-weight: 700;
+            color: #2c3e50;
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: 2em;
+        }
+
+        h2 {
+            font-size: 1.6em;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 0.5em;
+        }
+
+        h3 {
+            font-size: 1.3em;
+        }
+
+        h4 {
+            font-size: 1.1em;
+        }
+
+        p {
+            margin: 1em 0;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #c7254e;
+        }
+
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            line-height: 1.4;
+            margin: 1.5em 0;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ecf0f1;
+        }
+
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 1em;
+            margin-left: 0;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 1.5em 0;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+        }
+
+        table thead {
+            background: #ecf0f1;
+        }
+
+        table th {
+            padding: 0.8em;
+            text-align: left;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        table td {
+            padding: 0.8em;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        table tbody tr:hover {
+            background: #f9f9f9;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        /* Table of Contents Sidebar */
+        .toc-sidebar {
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+
+        .toc-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .toc-title {
+            font-size: 1.1em;
+            font-weight: 700;
+            margin-bottom: 1em;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+
+        .toc-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-content li {
+            margin: 0.4em 0;
+        }
+
+        .toc-content a {
+            display: block;
+            padding: 0.4em 0.8em;
+            border-radius: 3px;
+            font-size: 0.95em;
+            transition: all 0.2s ease;
+        }
+
+        .toc-content a:hover {
+            background: #e8f4f8;
+            color: #2980b9;
+        }
+
+        .toc-content ul ul {
+            margin-left: 1em;
+            border-left: 2px solid #ecf0f1;
+            padding-left: 0.5em;
+        }
+
+        .toc-content ul ul a {
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+
+        /* Canvas and interactive elements */
+        canvas {
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            background: white;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        input[type="button"] {
+            padding: 0.6em 1.2em;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.2s ease;
+        }
+
+        input[type="button"]:hover {
+            background: #2980b9;
+        }
+    </style>
+    <!-- MathJax for LaTeX/Math notation -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="blog-container">
+        <div class="blog-wrapper">
+            <article>
+                <div class="post-header">
+                    <h1 class="post-title">Example With Math And Animation</h1>
+                    <div class="post-meta">
+                        <span class="post-date">📅 2026-08-30</span><span class="post-author">✍️ Jaturong Kongmanee</span>
+                    </div>
+                    
+                </div>
+                <h1 id="understanding-gaussian-distributions-with-interactive-visualization">Understanding Gaussian Distributions with Interactive Visualization</h1>
+<h2 id="introduction">Introduction</h2>
+<p>The Gaussian (normal) distribution is one of the most important probability distributions in statistics and machine learning. In this post, we'll explore its mathematical properties and visualize it interactively.</p>
+<h2 id="mathematical-definition">Mathematical Definition</h2>
+<p>The probability density function (PDF) of a Gaussian distribution is defined as:</p>
+<p>$$f(x) = \frac{1}{\sigma\sqrt{2\pi}} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)$$</p>
+<p>where:
+- $\mu$ is the mean (center of the distribution)
+- $\sigma$ is the standard deviation (controls the width)
+- $\pi$ and $e$ are mathematical constants</p>
+<h2 id="properties">Properties</h2>
+<p>Some key properties of the Gaussian distribution:</p>
+<ol>
+<li><strong>Symmetry</strong>: The distribution is symmetric around the mean $\mu$</li>
+<li><strong>68-95-99.7 Rule</strong>: </li>
+<li>~68% of data falls within $\mu \pm \sigma$</li>
+<li>~95% of data falls within $\mu \pm 2\sigma$</li>
+<li>
+<p>~99.7% of data falls within $\mu \pm 3\sigma$</p>
+</li>
+<li>
+<p><strong>Cumulative Distribution Function (CDF)</strong>:</p>
+</li>
+</ol>
+<p>$$F(x) = \frac{1}{2}\left[1 + \text{erf}\left(\frac{x-\mu}{\sigma\sqrt{2}}\right)\right]$$</p>
+<p>where $\text{erf}$ is the error function.</p>
+<h2 id="interactive-visualization">Interactive Visualization</h2>
+<p>Below is an interactive visualization where you can adjust the mean ($\mu$) and standard deviation ($\sigma$) to see how the Gaussian distribution changes:</p>
+<div style="text-align: center; margin: 2em 0;">
+  <canvas id="gaussianCanvas" width="600" height="400" style="border: 1px solid #ccc; background: white;"></canvas>
+</div>
+
+<div style="text-align: center; margin: 1em 0;">
+  <div>
+    <label>Mean (μ): <input type="range" id="muSlider" min="-5" max="5" step="0.1" value="0" style="width: 200px;"> <span id="muValue">0</span></label>
+  </div>
+  <div style="margin-top: 1em;">
+    <label>Std Dev (σ): <input type="range" id="sigmaSlider" min="0.1" max="3" step="0.1" value="1" style="width: 200px;"> <span id="sigmaValue">1</span></label>
+  </div>
+</div>
+
+<script>
+  const canvas = document.getElementById('gaussianCanvas');
+  const ctx = canvas.getContext('2d');
+  const muSlider = document.getElementById('muSlider');
+  const sigmaSlider = document.getElementById('sigmaSlider');
+  const muValue = document.getElementById('muValue');
+  const sigmaValue = document.getElementById('sigmaValue');
+
+  function gaussian(x, mu, sigma) {
+    const exponent = -Math.pow(x - mu, 2) / (2 * Math.pow(sigma, 2));
+    return (1 / (sigma * Math.sqrt(2 * Math.PI))) * Math.exp(exponent);
+  }
+
+  function drawGaussian() {
+    const mu = parseFloat(muSlider.value);
+    const sigma = parseFloat(sigmaSlider.value);
+
+    muValue.textContent = mu.toFixed(1);
+    sigmaValue.textContent = sigma.toFixed(1);
+
+    // Clear canvas
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Draw grid
+    ctx.strokeStyle = '#e0e0e0';
+    ctx.lineWidth = 1;
+    for (let i = -5; i <= 5; i++) {
+      const x = ((i - (-5)) / 10) * canvas.width;
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, canvas.height);
+      ctx.stroke();
+    }
+
+    // Draw axes
+    ctx.strokeStyle = '#000';
+    ctx.lineWidth = 2;
+    const axisY = canvas.height * 0.8;
+    ctx.beginPath();
+    ctx.moveTo(0, axisY);
+    ctx.lineTo(canvas.width, axisY);
+    ctx.stroke();
+
+    // Draw curve
+    ctx.strokeStyle = '#2196F3';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+
+    for (let px = 0; px < canvas.width; px++) {
+      const xVal = -5 + (px / canvas.width) * 10;
+      const y = gaussian(xVal, mu, sigma);
+      const py = axisY - (y * canvas.height * 0.6);
+
+      if (px === 0) {
+        ctx.moveTo(px, py);
+      } else {
+        ctx.lineTo(px, py);
+      }
+    }
+    ctx.stroke();
+
+    // Draw labels
+    ctx.fillStyle = '#000';
+    ctx.font = '12px Arial';
+    for (let i = -5; i <= 5; i++) {
+      const x = ((i - (-5)) / 10) * canvas.width;
+      ctx.fillText(i.toString(), x - 5, axisY + 20);
+    }
+  }
+
+  muSlider.addEventListener('input', drawGaussian);
+  sigmaSlider.addEventListener('input', drawGaussian);
+
+  // Initial draw
+  drawGaussian();
+</script>
+
+<h2 id="applications">Applications</h2>
+<p>Gaussian distributions are fundamental to many machine learning algorithms:</p>
+<ul>
+<li><strong>Linear Regression</strong>: Assumes normally distributed residuals</li>
+<li><strong>Gaussian Processes</strong>: A non-parametric approach using Gaussians</li>
+<li><strong>Variational Inference</strong>: Uses Gaussian approximations</li>
+<li><strong>Neural Networks</strong>: Weight initialization often assumes Gaussians</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Understanding the Gaussian distribution is crucial for anyone working in statistics, probability, or machine learning. The interactive visualization above helps build intuition about how the parameters affect the shape of the distribution.</p>
+            </article>
+
+            <aside class="toc-sidebar">
+                <div class="toc-content">
+                    <div class="toc-title">📑 Table of Contents</div><ul><li><a href="#introduction">Introduction</a></li><li><a href="#mathematical-definition">Mathematical Definition</a></li><li><a href="#properties">Properties</a></li><li><a href="#interactive-visualization">Interactive Visualization</a></li><li><a href="#applications">Applications</a></li><li><a href="#conclusion">Conclusion</a></li></ul>
+                </div>
+            </aside>
+        </div>
+
+        <div class="back-link">
+            <a class="link" href="https://jaturongkongmanee.github.io/website/"><input type="button" value="Back to the main page"></a>
+        </div>
+    </div>
+</body>
+</html>

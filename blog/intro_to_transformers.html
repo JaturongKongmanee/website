@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Gentle Introduction to Transformer Architecture</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../stylesheet.css">
+    <link href="https://fonts.cdnfonts.com/css/iowanoldst-bt" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IowanOldSt BT', Georgia, serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fafafa;
+        }
+
+        .blog-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .back-link {
+            margin-bottom: 2em;
+        }
+
+        .blog-wrapper {
+            display: grid;
+            grid-template-columns: 150px 1fr 180px;
+            gap: 30px;
+            margin-bottom: 3em;
+        }
+
+        article {
+            order: 2;
+        }
+
+        .toc-sidebar {
+            order: 1;
+        }
+
+        .sidenote-column {
+            order: 3;
+            position: relative;
+        }
+
+        @media (max-width: 900px) {
+            .blog-wrapper {
+                grid-template-columns: 1fr;
+            }
+            article {
+                order: 0;
+            }
+            .toc-sidebar {
+                order: 0;
+            }
+            .toc-sidebar {
+                position: static;
+                margin-top: 3em;
+                padding: 20px;
+                background: #f9f9f9;
+                border-radius: 5px;
+            }
+        }
+
+        article {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .post-header {
+            margin-bottom: 2em;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 1.5em;
+        }
+
+        .post-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin: 0 0 0.3em 0;
+            color: #2c3e50;
+            line-height: 1.2;
+        }
+
+        .post-meta {
+            color: #7f8c8d;
+            font-size: 0.95em;
+            margin-bottom: 1em;
+            line-height: 1.6;
+        }
+
+        .post-tags {
+            display: flex;
+            gap: 0.5em;
+            flex-wrap: wrap;
+            margin-top: 2em;
+            margin-bottom: 2em;
+            padding-top: 1.5em;
+            border-top: 1px solid #ecf0f1;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #e8f4f8;
+            color: #2980b9;
+            padding: 0.3em 0.8em;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 500;
+            text-decoration: none;
+            border: 1px solid #b8dbe8;
+            transition: all 0.2s ease;
+        }
+
+        .tag:hover {
+            background: #2980b9;
+            color: white;
+            border-color: #2980b9;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 1.8em;
+            margin-bottom: 0.6em;
+            font-weight: 700;
+            color: #2c3e50;
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: 2em;
+        }
+
+        h2 {
+            font-size: 1.6em;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 0.5em;
+        }
+
+        h3 {
+            font-size: 1.3em;
+        }
+
+        h4 {
+            font-size: 1.1em;
+        }
+
+        p {
+            margin: 1em 0;
+        }
+
+        code {
+            background: #fcdfd9;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #c7254e;
+        }
+
+        pre {
+            background: #fcdfd9;
+            color: #333;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            line-height: 1.4;
+            margin: 1.5em 0;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: #333;
+        }
+
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 1em;
+            margin-left: 0;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 1.5em 0;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+        }
+
+        table thead {
+            background: #ecf0f1;
+        }
+
+        table th {
+            padding: 0.8em;
+            text-align: left;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        table td {
+            padding: 0.8em;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        table tbody tr:hover {
+            background: #f9f9f9;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        /* Table of Contents Sidebar */
+        .toc-sidebar {
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+        }
+
+        .toc-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .toc-title {
+            font-size: 1.1em;
+            font-weight: 700;
+            margin-bottom: 1em;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+
+        .toc-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-content li {
+            margin: 0.4em 0;
+        }
+
+        .toc-content a {
+            display: block;
+            padding: 0.4em 0.8em;
+            border-radius: 3px;
+            font-size: 0.8em;
+            color: #7f8c8d;
+            transition: all 0.2s ease;
+        }
+
+        .toc-content a:hover {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .toc-content ul ul {
+            margin-left: 1em;
+            border-left: 2px solid #ecf0f1;
+            padding-left: 0.5em;
+        }
+
+        .toc-content ul ul a {
+            font-size: 0.75em;
+            color: #7f8c8d;
+        }
+
+        /* Canvas and interactive elements */
+        canvas {
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            background: white;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        input[type="button"] {
+            padding: 0.6em 1.2em;
+            background: #fcdfd9;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.2s ease;
+        }
+
+        input[type="button"]:hover {
+            background: #f5b5a0;
+        }
+
+        /* Footnotes styling */
+        .footnote {
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+
+        .footnotes {
+            border-top: 1px solid #ecf0f1;
+            margin-top: 2em;
+            padding-top: 1em;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+
+        .footnotes ol {
+            margin: 0;
+            padding-left: 1.5em;
+        }
+
+        .footnotes li {
+            margin-bottom: 0.5em;
+            line-height: 1.5;
+        }
+
+        .footnotes p {
+            margin: 0;
+            display: inline;
+        }
+
+        sup a {
+            color: #3498db;
+            margin: 0 2px;
+            font-size: 0.85em;
+        }
+
+        sup a:hover {
+            color: #2980b9;
+        }
+
+        /* Sidenotes - positioned in right column */
+        .footnote {
+            display: none;
+        }
+
+        .sidenote {
+            position: absolute;
+            width: 200px;
+            font-size: 0.75em;
+            color: #7f8c8d;
+            line-height: 1.5;
+            padding: 0.5em;
+            margin-bottom: 1em;
+            border-left: 2px solid #ecf0f1;
+            padding-left: 0.8em;
+        }
+
+        .sidenote-num {
+            font-weight: 700;
+            color: #3498db;
+            margin-right: 0.3em;
+        }
+
+        @media (max-width: 1100px) {
+            .sidenote {
+                display: none;
+            }
+        }
+    </style>
+    <!-- MathJax for LaTeX/Math notation -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const footnoteDiv = document.querySelector('.footnote');
+            const sidenoteColumn = document.querySelector('.sidenote-column');
+            const article = document.querySelector('article');
+            if (!footnoteDiv || !sidenoteColumn || !article) return;
+
+            const footnotes = footnoteDiv.querySelectorAll('li');
+            const sidenotes = [];
+            const articleTop = article.offsetTop;
+
+            // First pass: create all sidenotes
+            footnotes.forEach((fn, index) => {
+                const id = fn.id;
+                const ref = document.querySelector('a[href="#' + id + '"]');
+
+                if (ref) {
+                    // Create sidenote
+                    const sidenote = document.createElement('div');
+                    sidenote.className = 'sidenote';
+
+                    // Get the number from the reference
+                    const num = ref.textContent;
+
+                    // Get footnote text (remove backref)
+                    const textContent = fn.cloneNode(true);
+                    const backref = textContent.querySelector('.footnote-backref');
+                    if (backref) backref.remove();
+                    const text = textContent.textContent.trim();
+
+                    sidenote.innerHTML = '<span class="sidenote-num">' + num + '.</span> ' + text;
+
+                    // Position sidenote based on reference location relative to article top
+                    const refRect = ref.getBoundingClientRect();
+                    const refPos = refRect.top + window.scrollY - articleTop;
+                    sidenote.style.top = refPos + 'px';
+
+                    // Insert into sidenote column
+                    sidenoteColumn.appendChild(sidenote);
+
+                    // Store sidenote info for overlap detection
+                    sidenotes.push({
+                        element: sidenote,
+                        refPos: refPos
+                    });
+                }
+            });
+
+            // Second pass: adjust positions to avoid overlap
+            sidenotes.forEach((sn, i) => {
+                const sidenote = sn.element;
+                const sidenoteHeight = sidenote.offsetHeight || 100;
+                let desiredTop = sn.refPos;
+
+                // Check overlap with previous sidenotes
+                for (let j = 0; j < i; j++) {
+                    const prevSn = sidenotes[j];
+                    const prevTop = parseFloat(prevSn.element.style.top);
+                    const prevHeight = prevSn.element.offsetHeight || 100;
+                    const prevBottom = prevTop + prevHeight + 10; // 10px gap
+
+                    // If this sidenote would overlap, move it down
+                    if (desiredTop < prevBottom) {
+                        desiredTop = prevBottom;
+                    }
+                }
+
+                sidenote.style.top = desiredTop + 'px';
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="blog-container">
+        <div class="blog-wrapper">
+            <article>
+                <div class="post-header">
+                    <h1 class="post-title">A Gentle Introduction to Transformer Architecture</h1>
+                    <div class="post-meta">
+                        Date: August 30, 2026 | Estimated Reading Time: 7 min | Author: Jaturong Kongmanee
+                    </div>
+                </div>
+                <h1 id="a-gentle-introduction-to-transformer-architecture">A Gentle Introduction to Transformer Architecture</h1>
+<h2 id="introduction">Introduction</h2>
+<p>The Transformer architecture has become the backbone of modern deep learning, powering everything from large language models (LLMs) to computer vision systems<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>. In this post, we'll explore the key components that make transformers work, with clear mathematical explanations.</p>
+<p>Before transformers, recurrent neural networks (RNNs) and their variants (LSTMs, GRUs) were the standard for sequence modeling. However, they have a fundamental limitation: they process sequences sequentially, which makes them slow to train on long sequences.</p>
+<p>The transformer solves this with a clever mechanism called <strong>attention</strong> [1], which allows the model to look at all parts of the input at once. This breakthrough was introduced in the seminal paper "Attention is All You Need" and has since become the foundation for state-of-the-art models in NLP and beyond.</p>
+<h2 id="the-problem-with-sequences">The Problem with Sequences</h2>
+<p>Traditional RNNs process sequences like this:</p>
+<p>$$h_t = \text{RNN}(x_t, h_{t-1})$$</p>
+<p>where:
+- $h_t$ is the hidden state at time $t$
+- $x_t$ is the input at time $t$
+- The computation depends on the previous hidden state $h_{t-1}$</p>
+<p>This sequential dependency creates two problems:
+1. <strong>Slow training</strong>: Each step must wait for the previous step to complete
+2. <strong>Limited context</strong>: For very long sequences, information from early steps gets diluted</p>
+<h2 id="the-attention-mechanism">The Attention Mechanism</h2>
+<p>The core innovation of transformers is the <strong>Scaled Dot-Product Attention</strong> [1]:</p>
+<p>$$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$</p>
+<p>where:
+- $Q$ (Query), $K$ (Key), $V$ (Value) are learned projections of the input
+- $d_k$ is the dimension of the keys
+- The scaling factor $\frac{1}{\sqrt{d_k}}$ prevents the softmax from having very small gradients</p>
+<h3 id="how-attention-works">How Attention Works</h3>
+<p>Let's break this down step by step:</p>
+<ol>
+<li><strong>Compute Attention Scores</strong>: $QK^T$ produces a score for each pair of positions</li>
+<li><strong>Scale</strong>: Divide by $\sqrt{d_k}$ to keep gradients stable</li>
+<li><strong>Softmax</strong>: Convert scores to probabilities that sum to 1</li>
+<li><strong>Weight Values</strong>: Multiply probabilities by the value vectors</li>
+</ol>
+<p>The result is a weighted sum of values, where weights represent how much each position should attend to each other position<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>.</p>
+<h3 id="example-with-numbers">Example with Numbers</h3>
+<p>Suppose we have a sequence of 3 words with embedding dimension $d_k = 2$:</p>
+<p>Let's say the Query, Key, and Value matrices are:</p>
+<p>$$Q = \begin{pmatrix} 1 &amp; 0 \ 0 &amp; 1 \ 1 &amp; 1 \end{pmatrix}, \quad K = \begin{pmatrix} 1 &amp; 0 \ 0 &amp; 1 \ 1 &amp; 1 \end{pmatrix}, \quad V = \begin{pmatrix} 2 &amp; 0 \ 0 &amp; 2 \ 1 &amp; 1 \end{pmatrix}$$</p>
+<p>Then:</p>
+<p>$$QK^T = \begin{pmatrix} 1 &amp; 0 &amp; 1 \ 0 &amp; 1 &amp; 1 \ 1 &amp; 1 &amp; 2 \end{pmatrix}$$</p>
+<p>After scaling by $\sqrt{d_k} = \sqrt{2} \approx 1.41$:</p>
+<p>$$\text{Scores} = \begin{pmatrix} 0.71 &amp; 0 &amp; 0.71 \ 0 &amp; 0.71 &amp; 0.71 \ 0.71 &amp; 0.71 &amp; 1.41 \end{pmatrix}$$</p>
+<p>After softmax on each row, we get attention weights between 0 and 1 that sum to 1.</p>
+<h2 id="multi-head-attention">Multi-Head Attention</h2>
+<p>Instead of using one attention function, transformers use <strong>multiple attention heads</strong> in parallel<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>:</p>
+<p>$$\text{MultiHead}(Q, K, V) = \text{Concat}(\text{head}_1, \ldots, \text{head}_h)W^O$$</p>
+<p>where each head is:</p>
+<p>$$\text{head}_i = \text{Attention}(QW_i^Q, KW_i^K, VW_i^V)$$</p>
+<p><strong>Why multiple heads?</strong>
+- Different heads can learn different types of relationships
+- One head might focus on syntactic structure, another on semantic meaning
+- Typically 8-16 heads in modern transformers</p>
+<h2 id="the-complete-transformer-block">The Complete Transformer Block</h2>
+<p>A transformer encoder block consists of:</p>
+<ol>
+<li><strong>Multi-Head Attention</strong></li>
+<li><strong>Add &amp; Norm</strong> (residual connection + layer normalization)</li>
+<li><strong>Feed-Forward Network</strong> (two dense layers with ReLU)</li>
+<li><strong>Add &amp; Norm</strong> (residual connection + layer normalization again)</li>
+</ol>
+<p>Mathematically:</p>
+<p>$$\text{Attention Out} = \text{LayerNorm}(x + \text{MultiHeadAttention}(x, x, x))$$</p>
+<p>$$\text{Output} = \text{LayerNorm}(\text{Attention Out} + \text{FFN}(\text{Attention Out}))$$</p>
+<p>where the FFN is:</p>
+<p>$$\text{FFN}(x) = \text{ReLU}(xW_1 + b_1)W_2 + b_2$$</p>
+<h2 id="positional-encoding">Positional Encoding</h2>
+<p>Since attention has no inherent notion of position (it's just a weighted sum), we need to inject position information. This is done with <strong>sinusoidal positional encodings</strong>:</p>
+<p>$$PE_{(pos,2i)} = \sin\left(\frac{pos}{10000^{2i/d}}\right)$$</p>
+<p>$$PE_{(pos,2i+1)} = \cos\left(\frac{pos}{10000^{2i/d}}\right)$$</p>
+<p>where:
+- $pos$ is the position in the sequence
+- $i$ is the dimension index
+- $d$ is the embedding dimension</p>
+<p>These are added to the input embeddings before passing through the transformer blocks.</p>
+<h2 id="from-encoder-to-decoder">From Encoder to Decoder</h2>
+<p>The full transformer consists of:</p>
+<ul>
+<li><strong>Encoder</strong>: Stack of transformer blocks processing the input</li>
+<li><strong>Decoder</strong>: Stack of transformer blocks generating the output, with cross-attention to the encoder</li>
+</ul>
+<p>In the decoder:
+- <strong>Self-Attention</strong>: Attends to previous tokens (with masking to prevent looking ahead)
+- <strong>Cross-Attention</strong>: Attends to encoder outputs
+- <strong>Feed-Forward</strong>: Same as encoder</p>
+<h2 id="key-advantages">Key Advantages</h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>RNN</th>
+<th>Transformer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Parallelizable</td>
+<td>❌ Sequential</td>
+<td>✅ All at once</td>
+</tr>
+<tr>
+<td>Long-range dependencies</td>
+<td>⚠️ Difficult</td>
+<td>✅ Direct</td>
+</tr>
+<tr>
+<td>Training speed</td>
+<td>Slow</td>
+<td>Fast</td>
+</tr>
+<tr>
+<td>Memory usage</td>
+<td>Low</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Position info</td>
+<td>Implicit</td>
+<td>Explicit (positional encoding)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="simple-implementation-sketch">Simple Implementation Sketch</h2>
+<p>Here's a minimal PyTorch-like pseudocode based on the transformer architecture [1]:</p>
+<pre><code class="language-python">class Attention(nn.Module):
+    def forward(self, Q, K, V):
+        scores = Q @ K.T / sqrt(d_k)  # Compute scores
+        weights = softmax(scores)       # Convert to probabilities
+        return weights @ V              # Weight values
+
+class TransformerBlock(nn.Module):
+    def forward(self, x):
+        # Multi-head attention with residual connection
+        x = x + MultiHeadAttention(x, x, x)
+        x = LayerNorm(x)
+
+        # Feed-forward with residual connection
+        x = x + FFN(x)
+        x = LayerNorm(x)
+
+        return x
+
+class Transformer(nn.Module):
+    def __init__(self, num_blocks):
+        self.blocks = [TransformerBlock() for _ in range(num_blocks)]
+
+    def forward(self, x):
+        x = x + PositionalEncoding(x)
+        for block in self.blocks:
+            x = block(x)
+        return x
+</code></pre>
+<h2 id="common-applications">Common Applications</h2>
+<h3 id="natural-language-processing">Natural Language Processing</h3>
+<ul>
+<li>
+<p><strong>GPT series</strong> [4]: Decoder-only transformers for text generation. Pioneered by OpenAI, these models demonstrate the effectiveness of transformer-only architectures for language understanding and generation.</p>
+</li>
+<li>
+<p><strong>BERT</strong> [2]: Encoder-only transformers for classification and understanding. Introduced bidirectional training of transformers, which significantly improved performance on NLP tasks.</p>
+</li>
+<li>
+<p><strong>T5</strong> [3]: Encoder-decoder for sequence-to-sequence tasks. Unified NLP tasks as text-to-text problems, showing the flexibility of the transformer architecture.</p>
+</li>
+</ul>
+<h3 id="computer-vision">Computer Vision</h3>
+<ul>
+<li>
+<p><strong>Vision Transformer (ViT)</strong> [5]: Applies transformers directly to image patches, demonstrating that pure transformer-based models can achieve competitive results on image classification without convolutional layers.</p>
+</li>
+<li>
+<p><strong>DETR</strong>: Detection with transformers, treating object detection as a sequence-to-sequence problem.</p>
+</li>
+</ul>
+<h3 id="multimodal">Multimodal</h3>
+<ul>
+<li><strong>CLIP</strong>: Vision + Language models that align image and text representations.</li>
+<li><strong>Flamingo</strong>: Vision + Language generation combining the strengths of both modalities.</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>The transformer architecture revolutionized deep learning by [1]:
+1. Enabling <strong>parallel processing</strong> of sequences
+2. Capturing <strong>long-range dependencies</strong> effectively
+3. Providing a <strong>flexible building block</strong> for many domains</p>
+<p>The key insight is the attention mechanism: instead of processing sequences step-by-step, allow the model to dynamically focus on relevant parts of the input. Since its introduction, the transformer has been continuously improved with variants like BERT [2], T5 [3], GPT [4], Vision Transformers [5], and ELECTRA [6], showing its versatility across different domains and tasks.</p>
+<h2 id="cited-as">Cited as</h2>
+<p>Please cite this work as:</p>
+<!-- **APA Style:** -->
+
+<pre><code>Kongmanee, J. (Aug 2026). A Gentle Introduction to Transformer Architecture. 
+Jaturong Kongmanee. https://jaturongkongmanee.github.io/website/blog/intro_to_transformers.html
+</code></pre>
+<p>Or use the BibTeX citation:</p>
+<!-- **BibTeX:** -->
+
+<pre><code class="language-bibtex">@article{kongmanee2026transformers,
+  title   = &quot;A Gentle Introduction to Transformer Architecture&quot;,
+  author  = &quot;Kongmanee, Jaturong&quot;,
+  journal = &quot;jaturongkongmanee.github.io&quot;,
+  year    = &quot;2026&quot;,
+  month   = &quot;Aug&quot;,
+  url     = &quot;https://jaturongkongmanee.github.io/website/blog/intro_to_transformers.html&quot;
+}
+</code></pre>
+<hr />
+<h2 id="references">References</h2>
+<p>[1] Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., ... &amp; Polosukhin, I. <a href="https://arxiv.org/abs/1706.03762">"Attention is all you need."</a> <em>Advances in Neural Information Processing Systems</em> (2017)</p>
+<p>[2] Devlin, J., Chang, M. W., Lee, K., &amp; Toutanova, K. <a href="https://arxiv.org/abs/1810.04805">"BERT: Pre-training of deep bidirectional transformers for language understanding."</a> arXiv preprint arXiv:1810.04805 (2018)</p>
+<p>[3] Raffel, C., Shazeer, N., Roberts, A., Lee, K., Narang, S., Matena, M., ... &amp; Liu, P. J. <a href="https://arxiv.org/abs/1910.10683">"Exploring the limits of transfer learning with a unified text-to-text transformer."</a> arXiv preprint arXiv:1910.10683 (2019)</p>
+<p>[4] Brown, T. B., Mann, B., Ryder, N., Subbiah, M., Kaplan, J., Dhariwal, P., ... &amp; Amodei, D. <a href="https://arxiv.org/abs/2005.14165">"Language models are few-shot learners."</a> arXiv preprint arXiv:2005.14165 (2020)</p>
+<p>[5] Dosovitskiy, A., Beyer, L., Kolesnikov, A., Weissenborn, D., Zhai, X., Unterthiner, T., ... &amp; Houlsby, N. <a href="https://arxiv.org/abs/2010.11929">"An image is worth 16x16 words: Transformers for image recognition at scale."</a> arXiv preprint arXiv:2010.11929 (2020)</p>
+<p>[6] Clark, K., Luong, M. T., Le, Q. V., &amp; Manning, C. D. <a href="https://arxiv.org/abs/2020.04687">"ELECTRA: Pre-training text encoders as discriminators rather than generators."</a> <em>International Conference on Learning Representations</em> (2020)</p>
+<!-- 
+## Further Reading
+
+- [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/) - Great visual explanation
+- [Transformers from Scratch](https://e2eml.school/transformers.html) - Interactive walkthrough
+- [The Transformer Blueprint](https://samrawal.medium.com/transformers-from-scratch-in-pytorch-a-step-by-step-guide-6318e79f367b) - Step-by-step PyTorch guide
+
+--- -->
+
+<!-- **Tags**: #DeepLearning #NLP #Transformers #Attention #MachineLearning -->
+
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>The transformer architecture was introduced by Vaswani et al. in 2017 and has since become the foundation for most modern NLP and vision models.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>This mechanism allows the model to learn which parts of the input are most relevant for each output position, enabling complex reasoning and long-range dependencies.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>Multi-head attention allows the model to attend to information from different representation subspaces at different positions. With just one head, the model would have limited expressiveness.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                <div class="post-tags"><span class="tag">deep-learning</span><span class="tag">nlp</span><span class="tag">attention-mechanism</span><span class="tag">transformers</span></div>
+            </article>
+
+            <aside class="toc-sidebar">
+                <div class="toc-content">
+                    <ul><li><a href="#introduction">Introduction</a></li><li><a href="#the-problem-with-sequences">The Problem with Sequences</a></li><li><a href="#the-attention-mechanism">The Attention Mechanism</a></li><ul><li><a href="#how-attention-works">How Attention Works</a></li><li><a href="#example-with-numbers">Example with Numbers</a></li></ul><li><a href="#multi-head-attention">Multi-Head Attention</a></li><li><a href="#the-complete-transformer-block">The Complete Transformer Block</a></li><li><a href="#positional-encoding">Positional Encoding</a></li><li><a href="#from-encoder-to-decoder">From Encoder to Decoder</a></li><li><a href="#key-advantages">Key Advantages</a></li><li><a href="#simple-implementation-sketch">Simple Implementation Sketch</a></li><li><a href="#common-applications">Common Applications</a></li><ul><li><a href="#natural-language-processing">Natural Language Processing</a></li><li><a href="#computer-vision">Computer Vision</a></li><li><a href="#multimodal">Multimodal</a></li></ul><li><a href="#conclusion">Conclusion</a></li><li><a href="#cited-as">Cited as</a></li><li><a href="#references">References</a></li></ul>
+                </div>
+            </aside>
+
+            <aside class="sidenote-column"></aside>
+        </div>
+
+        <div class="back-link">
+            <a class="link" href="https://jaturongkongmanee.github.io/website/"><input type="button" value="Back to the main page"></a>
+        </div>
+    </div>
+</body>
+</html>
