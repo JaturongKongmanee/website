@@ -502,6 +502,10 @@ HTML_TEMPLATE = '''<!DOCTYPE html>
             <aside class="sidenote-column"></aside>
         </div>
 
+        <div class="back-link">
+            {back_link}
+        </div>
+
         <div class="giscus-container">
             <script src="https://giscus.app/client.js"
                     data-repo="JaturongKongmanee/website"
@@ -518,10 +522,6 @@ HTML_TEMPLATE = '''<!DOCTYPE html>
                     crossorigin="anonymous"
                     async>
             </script>
-        </div>
-
-        <div class="back-link">
-            {back_link}
         </div>
     </div>
 </body>
