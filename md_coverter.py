@@ -396,6 +396,13 @@ HTML_TEMPLATE = '''<!DOCTYPE html>
                 display: none;
             }}
         }}
+
+        /* Giscus Comments Section */
+        .giscus-container {{
+            margin-top: 3em;
+            padding-top: 2em;
+            border-top: 2px solid #ecf0f1;
+        }}
     </style>
     <!-- MathJax for LaTeX/Math notation -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -493,6 +500,24 @@ HTML_TEMPLATE = '''<!DOCTYPE html>
             </aside>
 
             <aside class="sidenote-column"></aside>
+        </div>
+
+        <div class="giscus-container">
+            <script src="https://giscus.app/client.js"
+                    data-repo="JaturongKongmanee/website"
+                    data-repo-id="R_kgDOIuZQJg"
+                    data-category="Announcements"
+                    data-category-id="DIC_kwDOIuZQJs4DEniS"
+                    data-mapping="pathname"
+                    data-strict="0"
+                    data-reactions-enabled="1"
+                    data-emit-metadata="0"
+                    data-input-position="bottom"
+                    data-theme="preferred_color_scheme"
+                    data-lang="en"
+                    crossorigin="anonymous"
+                    async>
+            </script>
         </div>
 
         <div class="back-link">
